@@ -21,4 +21,8 @@ export default class Player extends Entity {
     }
     weapon.fire();
   }
+
+  isAttacking() {
+    return this.weapons[this.cWeapon].isBusy();
+  }
 }

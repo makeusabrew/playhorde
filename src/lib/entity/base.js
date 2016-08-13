@@ -27,4 +27,11 @@ export default class Entity {
     this.x += this.vx;
     this.y += this.vy;
   }
+
+  attack() {
+  }
+
+  isAttacking() {
+    return false;
+  }
 }

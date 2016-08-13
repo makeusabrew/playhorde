@@ -17,7 +17,9 @@ export default class EntityRenderer {
   }
 
   consolidate() {
-    if (this.entity.hasVelocity()) {
+    if (this.entity.isAttacking()) {
+      this.setAnimation("attack");
+    } else if (this.entity.hasVelocity()) {
       this.setAnimation("walk");
     } else {
       this.setAnimation("idle");

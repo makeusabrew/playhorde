@@ -11,6 +11,5 @@ export default class Weapon {
   }
 
   fire() {
-    throw new Error("Not implemented");
   }
 }
