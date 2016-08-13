@@ -9,10 +9,11 @@ export default class EntityRenderer {
     this.sprite = sprite;
     this.entity = entity;
     this.offset = offset;
+
     this.animCache = {};
   }
 
-  consolidate() {
+  reconcile() {
     if (this.entity.isAttacking() && this.hasAnimation("attack")) {
       this.setAnimation("attack");
     } else if (this.entity.hasVelocity()) {

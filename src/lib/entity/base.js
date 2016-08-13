@@ -21,11 +21,12 @@ export default class Entity {
     return this.vx !== 0 || this.vy !== 0;
   }
 
-  move() {
+  tick() {
     // @NOTE: this will probably change or disappear as we move
     // to using phaser's physics stuff
     this.x += this.vx;
     this.y += this.vy;
+    // brains go in here
   }
 
   attack() {

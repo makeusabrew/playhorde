@@ -16,7 +16,7 @@ class MainState extends Phaser.State {
     this.renderers = [];
 
     this.player = new Player();
-    this.player.x = 50;
+    this.player.x = 250;
     this.player.y = 50;
     this.player.addWeapon(new Knife(), true);
 
@@ -64,9 +64,11 @@ class MainState extends Phaser.State {
 
       zombie.x = 100 + (i*50);
       zombie.y = 100 + (i*50);
+      zombie.a = Math.floor(Math.random() * 360);
 
       const zSprite = this.add.sprite(0, 0, "zombie", "skeleton-idle_0.png");
       zSprite.animations.add("idle", Phaser.Animation.generateFrameNames("skeleton-idle_", 0, 16, ".png", 0), 10, true, false);
+      zSprite.animations.add("walk", Phaser.Animation.generateFrameNames("skeleton-move_", 0, 16, ".png", 0), 10, true, false);
 
       this.renderers.push(new EntityRenderer(zombie, zSprite, 0.2));
 
@@ -115,9 +117,13 @@ class MainState extends Phaser.State {
       this.player.a = 315;
     }
 
-    this.player.move();
+    const now = Date.now();
 
-    this.renderers.forEach(renderer => renderer.consolidate());
+    this.player.tick();
+
+    this.zombies.forEach(zombie => zombie.tick(now));
+
+    this.renderers.forEach(renderer => renderer.reconcile());
 
     this.camera.focusOn(this.player);
   }
