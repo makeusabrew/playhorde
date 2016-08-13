@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 export default class Entity {
   constructor() {
     this.x = 0;
@@ -15,6 +17,10 @@ export default class Entity {
       // for returning position and angle
       a: this.a
     };
+  }
+
+  getPoint() {
+    return new Phaser.Point(this.x, this.y);
   }
 
   hasVelocity() {

@@ -66,9 +66,12 @@ class MainState extends Phaser.State {
       zombie.y = 100 + (i*50);
       zombie.a = Math.floor(Math.random() * 360);
 
+      zombie.setTarget(this.player);
+
       const zSprite = this.add.sprite(0, 0, "zombie", "skeleton-idle_0.png");
       zSprite.animations.add("idle", Phaser.Animation.generateFrameNames("skeleton-idle_", 0, 16, ".png", 0), 10, true, false);
       zSprite.animations.add("walk", Phaser.Animation.generateFrameNames("skeleton-move_", 0, 16, ".png", 0), 10, true, false);
+      zSprite.animations.add("attack", Phaser.Animation.generateFrameNames("skeleton-attack_", 0, 8, ".png", 0), 10, true, false);
 
       this.renderers.push(new EntityRenderer(zombie, zSprite, 0.2));
 
