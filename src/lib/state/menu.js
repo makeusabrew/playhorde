@@ -12,7 +12,7 @@ class MenuState extends Phaser.State {
     this.add.text(this.game.world.centerX, 0, text, style);
 
     this.input.onDown.add(() => {
-      this.state.start("main");
+      this.state.start("game");
     });
   }
 }

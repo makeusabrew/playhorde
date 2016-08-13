@@ -1,7 +1,9 @@
 import Phaser from "phaser";
 
-import Player from "../entity/player";
 import EntityRenderer from "../renderer/entity";
+
+import Player from "../entity/player";
+import Zombie from "../entity/zombie";
 
 import Knife from "../weapon/knife";
 
@@ -49,21 +51,33 @@ class MainState extends Phaser.State {
     knife.animations.add("run", Phaser.Animation.generateFrameNames("move/survivor-move_knife_", 0, 19, ".png", 0), 20, true, false);
     knife.animations.add("attack", Phaser.Animation.generateFrameNames("meleeattack/survivor-meleeattack_knife_", 0, 19, ".png", 0), 20, true, false);
 
-    pRenderer.addSprite(
-      feet,
-      0.2
-    );
+    pRenderer.addSprite(feet, 0.2);
 
-    pRenderer.addSprite(
-      knife,
-      0.2
-    );
+    pRenderer.addSprite(knife, 0.2);
 
     this.renderers.push(pRenderer);
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.space = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
+
+    this.zombies = [];
+
+    for (var i = 0; i < 10; i++) {
+      const zombie = new Zombie();
+
+      zombie.x = 100 + (i*50);
+      zombie.y = 100 + (i*50);
+
+      const zSprite = this.add.sprite(0, 0, "zombie", "skeleton-idle_0.png");
+      zSprite.animations.add("idle", Phaser.Animation.generateFrameNames("skeleton-idle_", 0, 16, ".png", 0), 20, true, false);
+
+      const renderer = new EntityRenderer(zombie);
+      renderer.addSprite(zSprite, 0.2);
+      this.renderers.push(renderer);
+
+      this.zombies.push(zombie);
+    }
   }
 
   update() {
