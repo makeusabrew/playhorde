@@ -4,10 +4,10 @@ class BootState extends Phaser.State {
   preload() {
     // load the background. this probably won't stay like this as I
     // suspect we'll actually generate maps from tilesets instead
-    //this.load.tilemap("map", "path/to/tilemap.json", null, Phaser.Tilemap.TILED_JSON);
+    this.load.tilemap("level1", "/assets/maps/level1.json", null, Phaser.Tilemap.TILED_JSON);
 
     // the actual tiles
-    //this.load.image("tiles", "path/to/tiles.png");
+    this.load.image("tiles", "/assets/img/medieval.png");
   }
 
   create() {
