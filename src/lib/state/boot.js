@@ -8,6 +8,10 @@ class BootState extends Phaser.State {
 
     // the actual tiles
     this.load.image("tiles", "/assets/img/medieval.png");
+
+    this.load.atlasJSONHash("player:feet", "/assets/img/player/feet.png", "/assets/img/player/feet.json");
+    this.load.atlasJSONHash("player:knife", "/assets/img/player/knife.png", "/assets/img/player/knife.json");
+    this.load.atlasJSONHash("player:handgun", "/assets/img/player/handgun.png", "/assets/img/player/handgun.json");
   }
 
   create() {
