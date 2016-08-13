@@ -20,3 +20,23 @@ Maybe there are other things like trees which you can chop down.
 Should be able to set things like automatic turrets, traps, etc.
 
 What about making stuff a bit more line-of-sight ish?
+
+Sound - how is this going to work? Trying to keep stuff decoupled. For example,
+when a zombie enters an attacking sound it'd be nice to play a groan or roar or something.
+Don't want to get too obsessed with decoupling stuff too early, but entities risk getting
+extremely fat if they know too much.
+
+Emitters could be interesting here; for example if all state logic gets encapsulated a bit
+more cleanly then they could perhaps emit when they change. Then we could just do...
+
+const z = new Zombie();
+const s = new State({some state configuration here??});
+z.state = s;
+
+s.on("change", state => {
+  if (state === "whatever") {
+    Something.playSound();
+  }
+});
+
+Then again that's not much different to just making Zombies an event emitter and doing z.on("state:change");

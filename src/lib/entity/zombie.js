@@ -42,6 +42,7 @@ export default class Zombie extends Entity {
   setState(state) {
     this.state = state;
     this.stateTime = Date.now();
+    //this.emit("state", state);
   }
 
   tick(now) {

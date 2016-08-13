@@ -73,6 +73,14 @@ class MainState extends Phaser.State {
       zSprite.animations.add("walk", Phaser.Animation.generateFrameNames("skeleton-move_", 0, 16, ".png", 0), 10, true, false);
       zSprite.animations.add("attack", Phaser.Animation.generateFrameNames("skeleton-attack_", 0, 8, ".png", 0), 10, true, false);
 
+      /*
+      zombie.on("state", state => {
+        if (state === "attacking") {
+          // play a sound
+        }
+      });
+      */
+
       this.renderers.push(new EntityRenderer(zombie, zSprite, 0.2));
 
       this.zombies.push(zombie);
