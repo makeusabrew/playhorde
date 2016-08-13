@@ -37,6 +37,8 @@ class MainState extends Phaser.State {
     */
 
     const feet = this.add.sprite(0, 0, "player:feet", "idle/survivor-idle_0.png");
+
+    // we can probably start to tuck this away inside entity renderers
     feet.animations.add("idle", Phaser.Animation.generateFrameNames("idle/survivor-idle_", 0, 19, ".png", 0), 20, true, false);
     feet.animations.add("walk", Phaser.Animation.generateFrameNames("walk/survivor-walk_", 0, 19, ".png", 0), 20, true, false);
     feet.animations.add("run", Phaser.Animation.generateFrameNames("run/survivor-run_", 0, 19, ".png", 0), 20, true, false);
@@ -65,7 +67,7 @@ class MainState extends Phaser.State {
       zombie.y = 100 + (i*50);
 
       const zSprite = this.add.sprite(0, 0, "zombie", "skeleton-idle_0.png");
-      zSprite.animations.add("idle", Phaser.Animation.generateFrameNames("skeleton-idle_", 0, 16, ".png", 0), 20, true, false);
+      zSprite.animations.add("idle", Phaser.Animation.generateFrameNames("skeleton-idle_", 0, 16, ".png", 0), 10, true, false);
 
       this.renderers.push(new EntityRenderer(zombie, zSprite, 0.2));
 
