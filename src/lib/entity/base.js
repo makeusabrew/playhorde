@@ -3,6 +3,8 @@ export default class Entity {
     this.x = 0;
     this.y = 0;
     this.a = 0;
+    this.vx = 0;
+    this.vy = 0;
   }
 
   getPosition() {
@@ -13,5 +15,16 @@ export default class Entity {
       // for returning position and angle
       a: this.a
     };
+  }
+
+  hasVelocity() {
+    return this.vx !== 0 || this.vy !== 0;
+  }
+
+  move() {
+    // @NOTE: this will probably change or disappear as we move
+    // to using phaser's physics stuff
+    this.x += this.vx;
+    this.y += this.vy;
   }
 }

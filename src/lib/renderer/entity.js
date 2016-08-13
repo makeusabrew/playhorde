@@ -17,12 +17,24 @@ export default class EntityRenderer {
   }
 
   consolidate() {
+    if (this.entity.hasVelocity()) {
+      this.setAnimation("walk");
+    } else {
+      this.setAnimation("idle");
+    }
+
     const {x, y, a} = this.entity.getPosition();
 
     this.bodies.forEach(body => {
       body.sprite.x = x + body.offset;
       body.sprite.y = y + body.offset;
       body.sprite.angle = a;
+    });
+  }
+
+  setAnimation(name) {
+    this.bodies.forEach(body => {
+      body.sprite.animations.play(name);
     });
   }
 }

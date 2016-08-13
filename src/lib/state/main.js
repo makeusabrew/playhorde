@@ -33,14 +33,24 @@ class MainState extends Phaser.State {
     // now player stuff
     const pRenderer = new EntityRenderer(this.player);
 
+    const feet = this.add.sprite(0, 0, "player:feet", "idle/survivor-idle_0.png");
+    feet.animations.add("idle", Phaser.Animation.generateFrameNames("idle/survivor-idle_", 0, 19, ".png", 0), 20, true, false);
+    feet.animations.add("walk", Phaser.Animation.generateFrameNames("walk/survivor-walk_", 0, 19, ".png", 0), 20, true, false);
+    feet.animations.add("run", Phaser.Animation.generateFrameNames("run/survivor-run_", 0, 19, ".png", 0), 20, true, false);
+
+    const knife = this.add.sprite(0, 0, "player:knife", "idle/survivor-idle_knife_0.png");
+    knife.animations.add("idle", Phaser.Animation.generateFrameNames("idle/survivor-idle_knife_", 0, 19, ".png", 0), 20, true, false);
+    knife.animations.add("walk", Phaser.Animation.generateFrameNames("move/survivor-move_knife_", 0, 19, ".png", 0), 20, true, false);
+    knife.animations.add("run", Phaser.Animation.generateFrameNames("move/survivor-move_knife_", 0, 19, ".png", 0), 20, true, false);
+
     pRenderer.addSprite(
-      this.add.sprite(0, 0, "player:feet", "idle/survivor-idle_0.png"),
+      feet,
       0.2,
       0
     );
 
     pRenderer.addSprite(
-      this.add.sprite(0, 0, "player:knife", "idle/survivor-idle_knife_0.png"),
+      knife,
       0.2
     );
 
@@ -50,17 +60,24 @@ class MainState extends Phaser.State {
   }
 
   update() {
+    // @NOTE: this will probably change or disappear as we move
+    // to using phaser's physics stuff
+
+    this.player.vx = this.player.vy = 0;
+
     if (this.cursors.down.isDown) {
-      this.player.y += 4;
+      this.player.vy = 2;
     } else if (this.cursors.up.isDown) {
-      this.player.y -= 4;
+      this.player.vy = -2;
     }
 
     if (this.cursors.right.isDown) {
-      this.player.x += 4;
+      this.player.vx = 2;
     } else if (this.cursors.left.isDown) {
-      this.player.x -= 4;
+      this.player.vx = -2;
     }
+
+    this.player.move();
 
     this.renderers.forEach(renderer => renderer.consolidate());
 
