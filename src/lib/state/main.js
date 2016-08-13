@@ -77,6 +77,25 @@ class MainState extends Phaser.State {
       this.player.vx = -2;
     }
 
+    // yuck...
+    if (this.player.vx > 0 && this.player.vy === 0) {
+      this.player.a = 0;
+    } else if (this.player.vx > 0 && this.player.vy > 0) {
+      this.player.a = 45;
+    } else if (this.player.vy > 0 && this.player.vx === 0) {
+      this.player.a = 90;
+    } else if (this.player.vx < 0 && this.player.vy > 0) {
+      this.player.a = 135;
+    } else if (this.player.vx < 0 && this.player.vy === 0) {
+      this.player.a = 180;
+    } else if (this.player.vx < 0 && this.player.vy < 0) {
+      this.player.a = 225;
+    } else if (this.player.vy < 0 && this.player.vx === 0) {
+      this.player.a = 270;
+    } else if (this.player.vx > 0 && this.player.vy < 0) {
+      this.player.a = 315;
+    }
+
     this.player.move();
 
     this.renderers.forEach(renderer => renderer.consolidate());
