@@ -9,10 +9,11 @@ export default class EntityRenderer {
     this.sprite = sprite;
     this.entity = entity;
     this.offset = offset;
+    this.animCache = {};
   }
 
   consolidate() {
-    if (this.entity.isAttacking()) {
+    if (this.entity.isAttacking() && this.hasAnimation("attack")) {
       this.setAnimation("attack");
     } else if (this.entity.hasVelocity()) {
       this.setAnimation("walk");
@@ -29,5 +30,12 @@ export default class EntityRenderer {
 
   setAnimation(name) {
     this.sprite.animations.play(name);
+  }
+
+  hasAnimation(name) {
+    if (this.animCache[name] === undefined) {
+      this.animCache[name] = this.sprite.animations.getAnimation(name);
+    }
+    return this.animCache[name];
   }
 }
