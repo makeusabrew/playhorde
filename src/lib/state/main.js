@@ -3,6 +3,8 @@ import Phaser from "phaser";
 import Player from "../entity/player";
 import EntityRenderer from "../renderer/entity";
 
+import Knife from "../weapon/knife";
+
 class MainState extends Phaser.State {
   preload() {
     // nothing to do, I don't think?
@@ -14,6 +16,8 @@ class MainState extends Phaser.State {
     this.player = new Player();
     this.player.x = 50;
     this.player.y = 50;
+    this.player.addWeapon(new Knife(), true);
+
     this.map = this.add.tilemap("level1");
 
     // param1 - name of tileset in JSON, param2 our cache key
@@ -45,8 +49,7 @@ class MainState extends Phaser.State {
 
     pRenderer.addSprite(
       feet,
-      0.2,
-      0
+      0.2
     );
 
     pRenderer.addSprite(
@@ -57,6 +60,8 @@ class MainState extends Phaser.State {
     this.renderers.push(pRenderer);
 
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.space = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
   }
 
   update() {
@@ -75,6 +80,10 @@ class MainState extends Phaser.State {
       this.player.vx = 2;
     } else if (this.cursors.left.isDown) {
       this.player.vx = -2;
+    }
+
+    if (this.space.isDown) {
+      this.player.attack();
     }
 
     // yuck...
