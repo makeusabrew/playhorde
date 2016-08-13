@@ -36,14 +36,13 @@ class MainState extends Phaser.State {
     this.physics.p2.enable(this.player);
     */
 
-    // now player stuff
-    const pRenderer = new EntityRenderer(this.player);
-
     const feet = this.add.sprite(0, 0, "player:feet", "idle/survivor-idle_0.png");
     feet.animations.add("idle", Phaser.Animation.generateFrameNames("idle/survivor-idle_", 0, 19, ".png", 0), 20, true, false);
     feet.animations.add("walk", Phaser.Animation.generateFrameNames("walk/survivor-walk_", 0, 19, ".png", 0), 20, true, false);
     feet.animations.add("run", Phaser.Animation.generateFrameNames("run/survivor-run_", 0, 19, ".png", 0), 20, true, false);
     feet.animations.add("attack", Phaser.Animation.generateFrameNames("idle/survivor-idle_", 0, 19, ".png", 0), 20, true, false);
+
+    this.renderers.push(new EntityRenderer(this.player, feet, 0.2));
 
     const knife = this.add.sprite(0, 0, "player:knife", "idle/survivor-idle_knife_0.png");
     knife.animations.add("idle", Phaser.Animation.generateFrameNames("idle/survivor-idle_knife_", 0, 19, ".png", 0), 20, true, false);
@@ -51,11 +50,7 @@ class MainState extends Phaser.State {
     knife.animations.add("run", Phaser.Animation.generateFrameNames("move/survivor-move_knife_", 0, 19, ".png", 0), 20, true, false);
     knife.animations.add("attack", Phaser.Animation.generateFrameNames("meleeattack/survivor-meleeattack_knife_", 0, 19, ".png", 0), 20, true, false);
 
-    pRenderer.addSprite(feet, 0.2);
-
-    pRenderer.addSprite(knife, 0.2);
-
-    this.renderers.push(pRenderer);
+    this.renderers.push(new EntityRenderer(this.player, knife, 0.2));
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -72,9 +67,7 @@ class MainState extends Phaser.State {
       const zSprite = this.add.sprite(0, 0, "zombie", "skeleton-idle_0.png");
       zSprite.animations.add("idle", Phaser.Animation.generateFrameNames("skeleton-idle_", 0, 16, ".png", 0), 20, true, false);
 
-      const renderer = new EntityRenderer(zombie);
-      renderer.addSprite(zSprite, 0.2);
-      this.renderers.push(renderer);
+      this.renderers.push(new EntityRenderer(zombie, zSprite, 0.2));
 
       this.zombies.push(zombie);
     }
