@@ -1,0 +1,22 @@
+Horde
+-----
+Top down Kadoom style game but with hordes of zombies trying to get you.
+They wouldn't be very smart but there would be lots of them. Levels start
+off pretty quiet, users can do... stuff... (pick up weapons?).
+
+Each level is essentially just a fenced in rectangle with varying amounts
+of gaps in the fence. Zombies can only come through gaps in fences. Over time,
+more gaps appear in the fencing letting more zombies in at once. User can repair
+gaps sometimes if they have repair toolkits in hand.
+
+Ammo etc is limited but killing zombies will randomly drop stuff - ammo, guns,
+grenades, mines, repair kits.
+
+Maybe instead of repair kits, users get fence panels? That's a bit weird actually.
+But it would be nice to be able to create new fences, somehow.
+
+Maybe there are other things like trees which you can chop down.
+
+Should be able to set things like automatic turrets, traps, etc.
+
+What about making stuff a bit more line-of-sight ish?
