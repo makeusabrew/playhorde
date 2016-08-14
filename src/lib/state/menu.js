@@ -6,10 +6,11 @@ class MenuState extends Phaser.State {
   }
 
   create() {
-    const text = "Horde";
-    const style = { font: "65px Arial", fill: "#ff0044", align: "center" };
+    const font = this.add.retroFont("font:main", 32, 32, Phaser.RetroFont.TEXT_SET2, 10);
+    font.setText("Horde", true, 0, 8, Phaser.RetroFont.ALIGN_CENTER);
 
-    this.add.text(this.game.world.centerX, 0, text, style);
+    const image = this.add.image(this.game.world.centerX, 300, font);
+    image.anchor.set(0.5);
 
     this.input.onDown.add(() => {
       this.state.start("game");

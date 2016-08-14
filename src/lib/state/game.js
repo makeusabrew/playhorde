@@ -10,10 +10,6 @@ import Knife from "../weapon/knife";
 import EntityState from "../entity-state";
 
 class MainState extends Phaser.State {
-  preload() {
-    // nothing to do, I don't think?
-  }
-
   create() {
     // a global track of all entities; these are the actual 'living' thinking things
     // in the game, including the player
@@ -103,7 +99,8 @@ class MainState extends Phaser.State {
 
   update() {
     // @NOTE: this will probably change or disappear as we move
-    // to using phaser's physics stuff
+    // to using phaser's physics stuff. At the moment it's all
+    // pretty awful, but it's just to get things started
 
     this.player.vx = this.player.vy = 0;
 
@@ -149,9 +146,6 @@ class MainState extends Phaser.State {
     this.renderers.forEach(renderer => renderer.reconcile());
 
     this.camera.focusOn(this.player);
-  }
-
-  render() {
   }
 }
 
