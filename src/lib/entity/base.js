@@ -8,6 +8,7 @@ export default class Entity {
     this.vx = 0;
     this.vy = 0;
     this.r = 0;
+    this.health = 0;
   }
 
   getPosition() {
@@ -41,5 +42,9 @@ export default class Entity {
 
   isAttacking() {
     return false;
+  }
+
+  damageWith(weapon) {
+    this.health -= weapon.currentDamage();
   }
 }

@@ -116,10 +116,6 @@ class MainState extends Phaser.State {
       this.player.vx = -2;
     }
 
-    if (this.space.isDown) {
-      this.player.attack();
-    }
-
     // yuck...
     if (this.player.vx > 0 && this.player.vy === 0) {
       this.player.a = 0;
@@ -139,9 +135,28 @@ class MainState extends Phaser.State {
       this.player.a = 315;
     }
 
+    if (this.space.isDown) {
+      this.player.attack();
+    }
+
     const now = Date.now();
 
     this.entities.forEach(entity => entity.tick(now));
+
+    if (this.player.isAttacking()) {
+      // @TODO weapons differ... a lot
+
+      // assume knife for now. Although its attack phase lasts
+      // for a second, it's not dangerous during all of that time.
+      // Let's say it's from 100ms - 600ms that it actually damages
+      // stuff
+      const pWeapon = this.player.getWeapon();
+      if (pWeapon.isDoingDamage(now)) {
+        this.entities
+        .filter(e => e.constructor.name === "Zombie")
+        .forEach(e => e.damageWith(pWeapon));
+      }
+    }
 
     this.renderers.forEach(renderer => renderer.reconcile());
 

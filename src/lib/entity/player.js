@@ -15,6 +15,10 @@ export default class Player extends Entity {
     }
   }
 
+  getWeapon() {
+    return this.weapons[this.cWeapon];
+  }
+
   attack() {
     const weapon = this.weapons[this.cWeapon];
     if (weapon.isBusy()) {
