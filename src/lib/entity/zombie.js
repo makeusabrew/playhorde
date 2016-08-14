@@ -4,29 +4,11 @@ import {random, frandom} from "../util";
 
 const Point = Phaser.Point;
 
-/*
-const stateMap = {
-  "idle": {
-    "min": 5,
-    "max": 30,
-    "next": ["roaming"],
-  },
-  "roaming": {
-    "next": ["idle", "roaming"]
-  },
-  "roaming": {
-    "next": ["idle", "roaming"]
-  }
-};
-*/
-
 export default class Zombie extends Entity {
   constructor() {
     super();
 
     this.target = null;
-
-    this.setState("idle");
 
     this.awarenessRadius = random(50, 200);
     this.speed = frandom(0.3, 0.8);
@@ -38,38 +20,36 @@ export default class Zombie extends Entity {
     this.target = target;
   }
 
-  // hmm, be nice to have a separate composed object for state stuff, somehow
-  setState(state) {
-    this.state = state;
-    this.stateTime = Date.now();
-    //this.emit("state", state);
-  }
-
   tick(now) {
+    // always be on the lookout
     this.checkForTarget();
     // think
-    this[this.state](now);
+    this[this.state.get()](now);
     // move
     super.tick();
   }
 
   idle(now) {
-    if (now - this.stateTime >= 5e3 + Math.random() * 20e3) {
-      this.setState("roaming");
+    if (now - this.state.time() >= 5e3 + Math.random() * 20e3) {
+      this.state.set("roaming");
     }
   }
 
   checkForTarget() {
-    if (["tracking", "attacking"].indexOf(this.state) !== -1) {
+    // don't bother if we're already going for it
+    if (["tracking", "attacking"].indexOf(this.state.get()) !== -1) {
       return;
     }
 
+    // is the target anywhere within our general awareness radius?
     if (Point.distance(this.getPoint(), this.target.getPoint()) < this.awarenessRadius) {
-      this.setState("tracking");
+      this.state.set("tracking");
     }
   }
 
   roaming() {
+    // if we don't have anywhere to head to, pick a random point
+    // sort of near us
     if (!this.destination) {
       this.destination = new Point(
         this.x + (Math.floor(Math.random() * 301) - 150),
@@ -84,11 +64,13 @@ export default class Zombie extends Entity {
 
       this.a = Phaser.Math.radToDeg(radAngle);
 
+      // set our velocity then bail, we're good to go
       this.vx = Math.cos(radAngle) * this.speed;
       this.vy = Math.sin(radAngle) * this.speed;
       return;
     }
 
+    // already had a point we were heading towards - check we haven't reached it
     const distance = Point.distance(this.getPoint(), this.destination, true);
 
     if (distance <= 1) {
@@ -98,14 +80,16 @@ export default class Zombie extends Entity {
       this.vy = 0;
 
       if (Math.floor(Math.random() * 2) === 0) {
-        return this.setState("idle");
+        return this.state.set("idle");
       }
 
-      this.setState("roaming");
+      this.state.set("roaming");
     }
   }
 
   tracking() {
+    // if we're tracking then we have to continuously update our
+    // heading towards wherever our target is
     const radAngle = Point.angle(
       this.target.getPoint(),
       this.getPoint()
@@ -118,27 +102,29 @@ export default class Zombie extends Entity {
 
     const distance = Point.distance(this.getPoint(), this.target.getPoint());
 
+    // we've lost sight of our target, roam instead
     if (distance >= this.visibleRange) {
-      // add some randomness here
-      return this.setState("roaming");
+      return this.state.set("roaming");
     }
 
+    // this should probably account for the size of the target
     if (distance <= 30) {
       this.vx = 0;
       this.vy = 0;
-      return this.setState("attacking");
+      return this.state.set("attacking");
     }
   }
 
   attacking() {
     const distance = Point.distance(this.getPoint(), this.target.getPoint());
 
+    // @TODO account for size of target
     if (distance > 30) {
-      this.setState("tracking");
+      this.state.set("tracking");
     }
   }
 
   isAttacking() {
-    return this.state === "attacking";
+    return this.state.get() === "attacking";
   }
 }

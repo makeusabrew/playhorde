@@ -14,6 +14,8 @@ class BootState extends Phaser.State {
     this.load.atlasJSONHash("player:handgun", "/assets/img/player/handgun.png", "/assets/img/player/handgun.json");
 
     this.load.atlasJSONHash("zombie", "/assets/img/zombie/zombie.png", "/assets/img/zombie/zombie.json");
+
+    this.load.audiosprite("zombies", "/assets/sound/zombies.mp3", "/assets/sound/zombies.json");
   }
 
   create() {

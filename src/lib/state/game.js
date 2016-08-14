@@ -7,6 +7,8 @@ import Zombie from "../entity/zombie";
 
 import Knife from "../weapon/knife";
 
+import EntityState from "../entity-state";
+
 class MainState extends Phaser.State {
   preload() {
     // nothing to do, I don't think?
@@ -29,6 +31,9 @@ class MainState extends Phaser.State {
     this.layer = this.map.createLayer("background");
 
     this.world.setBounds(0, 0, 3200, 3200);
+
+    const fx = this.add.audioSprite("zombies");
+    fx.allowMultiple = true;
 
     /*
     this.physics.startSystem(Phaser.Physics.P2JS);
@@ -73,13 +78,15 @@ class MainState extends Phaser.State {
       zSprite.animations.add("walk", Phaser.Animation.generateFrameNames("skeleton-move_", 0, 16, ".png", 0), 10, true, false);
       zSprite.animations.add("attack", Phaser.Animation.generateFrameNames("skeleton-attack_", 0, 8, ".png", 0), 10, true, false);
 
-      /*
-      zombie.on("state", state => {
-        if (state === "attacking") {
-          // play a sound
+      const state = new EntityState("idle");
+
+      state.on("change", next => {
+        if (next === "attacking") {
+          fx.play("zombie-2");
         }
       });
-      */
+
+      zombie.state = state;
 
       this.renderers.push(new EntityRenderer(zombie, zSprite, 0.2));
 
