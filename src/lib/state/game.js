@@ -1,7 +1,5 @@
 import Phaser from "phaser";
 
-import EntityRenderer from "../renderer/entity";
-
 import Player from "../entity/player";
 import Zombie from "../entity/zombie";
 
@@ -12,12 +10,12 @@ import EntityState from "../entity-state";
 
 import EntityManager from "../manager/entity";
 
+// a global track of all entity renderers, which simply take care of the presentation
+// of entities without cluttering up the entity classes with any rendering logic
+import RenderManager from "../manager/renderer";
+
 class MainState extends Phaser.State {
   create() {
-    // a global track of all entity renderers, which simply take care of the presentation
-    // of entities without cluttering up the entity classes with any rendering logic
-    this.renderers = [];
-
     // set up the player
     this.player = new Player();
     this.player.x = 250;
@@ -48,38 +46,11 @@ class MainState extends Phaser.State {
     this.physics.p2.enable(this.player);
     */
 
-    const playerFeet = new EntityRenderer(
-      this.player,
-      this.add.sprite(0, 0, "player:feet", "idle_0.png"),
-      0.2
-    );
-
-    playerFeet.addAnimation("idle", 0, 0, 20);
-    playerFeet.addAnimation("walk", 0, 19, 20);
-
-    this.renderers.push(playerFeet);
-
-    const playerKnife = new EntityRenderer(
-      this.player,
-      this.add.sprite(0, 0, "player:knife", "idle_0.png"),
-      0.2
-    );
-
-    playerKnife.addAnimation("idle", 0, 19, 20);
-    playerKnife.addAnimation("walk", 0, 19, 20);
-
-    // last two params are X and Y offsets
-    // @FIXME not working well at all
-    playerKnife.addAnimation("attack", 0, 14, 20, 0, 0);
-
-    // @TODO: need some way of a) grouping sprites ourselves and b) setting which sprite of
-    // a group is the currently active layer
-
-    this.renderers.push(playerKnife);
-
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.space = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
+
+    RenderManager.add(this.player, this);
 
     // temporarily set up some random zombies
     for (let i = 0; i < 10; i++) {
@@ -92,16 +63,6 @@ class MainState extends Phaser.State {
 
       zombie.setTarget(this.player);
 
-      const zombieRenderer = new EntityRenderer(
-        zombie,
-        this.add.sprite(0, 0, "zombie", "idle_0.png"),
-        0.2
-      );
-
-      zombieRenderer.addAnimation("idle", 0, 16, 10);
-      zombieRenderer.addAnimation("walk", 0, 16, 10);
-      zombieRenderer.addAnimation("attack", 0, 8, 10);
-
       const state = new EntityState("idle");
 
       state.on("change", next => {
@@ -112,9 +73,8 @@ class MainState extends Phaser.State {
 
       zombie.state = state;
 
-      this.renderers.push(zombieRenderer);
-
       EntityManager.add(zombie);
+      RenderManager.add(zombie, this);
     }
   }
 
@@ -162,14 +122,7 @@ class MainState extends Phaser.State {
 
       if (result) {
         EntityManager.add(result);
-        if (result.getType() === "Bullet") {
-          const bRenderer = new EntityRenderer(
-            result,
-            this.add.sprite(0, 0, "bullet"),
-            0.5
-          );
-          this.renderers.push(bRenderer);
-        }
+        RenderManager.add(result, this);
       }
     }
 
@@ -209,7 +162,7 @@ class MainState extends Phaser.State {
       }
     }
 
-    this.renderers.forEach(renderer => renderer.reconcile());
+    RenderManager.all(renderer => renderer.reconcile());
 
     this.camera.focusOn(this.player);
   }
