@@ -39,4 +39,8 @@ export default class EntityRenderer {
     }
     return this.animCache[name];
   }
+
+  destroy() {
+    this.sprite.destroy();
+  }
 }

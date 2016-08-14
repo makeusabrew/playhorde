@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import Weapon from "./base";
 
 const RELOAD_TIME = 1e3;
@@ -12,11 +13,15 @@ export default class Knife extends Weapon {
     this.emit("fire");
   }
 
-  isDoingDamage(now) {
-    return now >= this.lastFired + 100 || now <= this.lastFired + 600;
+  isInDamagePhase(now) {
+    return now >= this.lastFired + 300 && now <= this.lastFired + 700;
   }
 
   currentDamage() {
     return 100;
+  }
+
+  isHitting(owner, target) {
+    return Phaser.Point.distance(owner.getPoint(), target.getPoint()) < 40;
   }
 }

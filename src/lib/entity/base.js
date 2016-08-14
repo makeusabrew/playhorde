@@ -44,7 +44,7 @@ export default class Entity {
     return false;
   }
 
-  damageWith(weapon) {
-    this.health -= weapon.currentDamage();
+  receiveDamage(damage) {
+    this.health -= damage;
   }
 }

@@ -24,6 +24,10 @@ export default class Zombie extends Entity {
   }
 
   tick(now) {
+    if (this.health <= 0) {
+      return;
+    }
+
     // always be on the lookout
     this.checkForTarget();
     // think

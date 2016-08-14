@@ -23,6 +23,7 @@ class MainState extends Phaser.State {
     this.player = new Player();
     this.player.x = 250;
     this.player.y = 50;
+    this.player.health = 100;
     this.player.addWeapon(new Knife(), true);
 
     this.entities.push(this.player);
@@ -73,6 +74,7 @@ class MainState extends Phaser.State {
       zombie.x = 100 + (i*50);
       zombie.y = 100 + (i*50);
       zombie.a = Math.floor(Math.random() * 360);
+      zombie.health = 100 + Math.floor(Math.random() * 101);
 
       zombie.setTarget(this.player);
 
@@ -151,10 +153,25 @@ class MainState extends Phaser.State {
       // Let's say it's from 100ms - 600ms that it actually damages
       // stuff
       const pWeapon = this.player.getWeapon();
-      if (pWeapon.isDoingDamage(now)) {
+
+      if (pWeapon.isInDamagePhase(now)) {
+
+        // this is so rubbish... but it's a start
         this.entities
-        .filter(e => e.constructor.name === "Zombie")
-        .forEach(e => e.damageWith(pWeapon));
+        .filter(e => e.constructor.name === "Zombie" && pWeapon.isHitting(this.player, e))
+        // does an entity receive damage, or a weapon deal damage?
+        .forEach(e => e.receiveDamage(pWeapon.currentDamage()));
+
+        // note... until we start removing elements from the entity list
+        // we're going to get a lot of build up in here
+        const deadZombies = this.entities.filter(e => e.health <= 0);
+
+        deadZombies.forEach(zombie => {
+          const r = this.renderers.find(r => r.entity === zombie);
+          if (r) {
+            r.destroy();
+          }
+        });
       }
     }
 
