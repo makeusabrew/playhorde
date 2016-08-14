@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 export default class EntityRenderer {
-  constructor(entity, sprite, scale = 1, offset = 1) {
+  constructor(entity, sprite, scale = 1) {
 
     sprite.scale.setTo(scale, scale);
 
@@ -10,13 +10,13 @@ export default class EntityRenderer {
 
     this.sprite = sprite;
     this.entity = entity;
-    this.offset = offset;
 
-    this.animCache = {};
+    this.animMeta = {};
+    this.currentAnim = null;
   }
 
   reconcile() {
-    if (this.entity.isAttacking() && this.hasAnimation("attack")) {
+    if (this.entity.isAttacking() && this.getAnimation("attack")) {
       this.setAnimation("attack");
     } else if (this.entity.hasVelocity()) {
       this.setAnimation("walk");
@@ -24,27 +24,29 @@ export default class EntityRenderer {
       this.setAnimation("idle");
     }
 
+    const {offsetX, offsetY} = this.animMeta[this.currentAnim];
+
     const {x, y, a} = this.entity.getPosition();
 
-    this.sprite.x = x + this.offset;
-    this.sprite.y = y + this.offset;
+    this.sprite.x = x + offsetX;
+    this.sprite.y = y + offsetY;
     this.sprite.angle = a;
   }
 
-  addAnimation(name, start, stop, fps) {
+  addAnimation(name, start, stop, fps, offsetX = 0, offsetY = 0) {
     this.sprite.animations.add(name, Phaser.Animation.generateFrameNames(`${name}_`, start, stop, ".png", 0), fps, true, false);
-    this.animCache[name] = true;
+    this.animMeta[name] = {
+      offsetX, offsetY
+    };
   }
 
   setAnimation(name) {
+    this.currentAnim = name;
     this.sprite.animations.play(name);
   }
 
-  hasAnimation(name) {
-    if (this.animCache[name] === undefined) {
-      this.animCache[name] = this.sprite.animations.getAnimation(name) !== null;
-    }
-    return this.animCache[name];
+  getAnimation(name) {
+    return this.animMeta[name];
   }
 
   destroy() {

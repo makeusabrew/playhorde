@@ -67,7 +67,9 @@ class MainState extends Phaser.State {
 
     playerKnife.addAnimation("idle", 0, 19, 20);
     playerKnife.addAnimation("walk", 0, 19, 20);
-    playerKnife.addAnimation("attack", 0, 14, 20);
+
+    // last two params are X and Y offsets
+    playerKnife.addAnimation("attack", 0, 14, 20, 5, 7);
 
     this.renderers.push(playerKnife);
 
@@ -86,10 +88,15 @@ class MainState extends Phaser.State {
 
       zombie.setTarget(this.player);
 
-      const zSprite = this.add.sprite(0, 0, "zombie", "skeleton-idle_0.png");
-      zSprite.animations.add("idle", Phaser.Animation.generateFrameNames("skeleton-idle_", 0, 16, ".png", 0), 10, true, false);
-      zSprite.animations.add("walk", Phaser.Animation.generateFrameNames("skeleton-move_", 0, 16, ".png", 0), 10, true, false);
-      zSprite.animations.add("attack", Phaser.Animation.generateFrameNames("skeleton-attack_", 0, 8, ".png", 0), 10, true, false);
+      const zombieRenderer = new EntityRenderer(
+        zombie,
+        this.add.sprite(0, 0, "zombie", "idle_0.png"),
+        0.2
+      );
+
+      zombieRenderer.addAnimation("idle", 0, 16, 10);
+      zombieRenderer.addAnimation("walk", 0, 16, 10);
+      zombieRenderer.addAnimation("attack", 0, 8, 10);
 
       const state = new EntityState("idle");
 
@@ -101,7 +108,7 @@ class MainState extends Phaser.State {
 
       zombie.state = state;
 
-      this.renderers.push(new EntityRenderer(zombie, zSprite, 0.2));
+      this.renderers.push(zombieRenderer);
 
       this.entities.push(zombie);
     }
