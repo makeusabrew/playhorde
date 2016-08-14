@@ -24,6 +24,8 @@ class MainState extends Phaser.State {
     this.player.x = 250;
     this.player.y = 50;
     this.player.health = 100;
+
+    // and and equip a knife
     this.player.addWeapon(new Knife(), true);
 
     this.entities.push(this.player);
@@ -46,22 +48,28 @@ class MainState extends Phaser.State {
     this.physics.p2.enable(this.player);
     */
 
-    const feet = this.add.sprite(0, 0, "player:feet", "idle/survivor-idle_0.png");
+    const playerFeet = new EntityRenderer(
+      this.player,
+      this.add.sprite(0, 0, "player:feet", "idle_0.png"),
+      0.2
+    );
 
-    // we can probably start to tuck this away inside entity renderers
-    feet.animations.add("idle", Phaser.Animation.generateFrameNames("idle/survivor-idle_", 0, 19, ".png", 0), 20, true, false);
-    feet.animations.add("walk", Phaser.Animation.generateFrameNames("walk/survivor-walk_", 0, 19, ".png", 0), 20, true, false);
-    feet.animations.add("run", Phaser.Animation.generateFrameNames("run/survivor-run_", 0, 19, ".png", 0), 20, true, false);
+    playerFeet.addAnimation("idle", 0, 0, 20);
+    playerFeet.addAnimation("walk", 0, 19, 20);
 
-    this.renderers.push(new EntityRenderer(this.player, feet, 0.2));
+    this.renderers.push(playerFeet);
 
-    const knife = this.add.sprite(0, 0, "player:knife", "idle/survivor-idle_knife_0.png");
-    knife.animations.add("idle", Phaser.Animation.generateFrameNames("idle/survivor-idle_knife_", 0, 19, ".png", 0), 20, true, false);
-    knife.animations.add("walk", Phaser.Animation.generateFrameNames("move/survivor-move_knife_", 0, 19, ".png", 0), 20, true, false);
-    knife.animations.add("run", Phaser.Animation.generateFrameNames("move/survivor-move_knife_", 0, 19, ".png", 0), 20, true, false);
-    knife.animations.add("attack", Phaser.Animation.generateFrameNames("meleeattack/survivor-meleeattack_knife_", 0, 19, ".png", 0), 20, true, false);
+    const playerKnife = new EntityRenderer(
+      this.player,
+      this.add.sprite(0, 0, "player:knife", "idle_0.png"),
+      0.2
+    );
 
-    this.renderers.push(new EntityRenderer(this.player, knife, 0.2));
+    playerKnife.addAnimation("idle", 0, 19, 20);
+    playerKnife.addAnimation("walk", 0, 19, 20);
+    playerKnife.addAnimation("attack", 0, 14, 20);
+
+    this.renderers.push(playerKnife);
 
     this.cursors = this.input.keyboard.createCursorKeys();
 

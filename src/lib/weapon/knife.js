@@ -14,7 +14,7 @@ export default class Knife extends Weapon {
   }
 
   isInDamagePhase(now) {
-    return now >= this.lastFired + 300 && now <= this.lastFired + 700;
+    return now >= this.lastFired + 200 && now <= this.lastFired + 600;
   }
 
   currentDamage() {

@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+const FADE_DELAY = 1000;
+
 class MenuState extends Phaser.State {
   create() {
     const music = this.add.audio("music");
@@ -14,7 +16,7 @@ class MenuState extends Phaser.State {
 
     this.add.tween(image).to({
       alpha: 1
-    }, 10000, Phaser.Easing.Linear.None, true, 2000, 0, false);
+    }, FADE_DELAY, Phaser.Easing.Linear.None, true, 2000, 0, false);
 
     setTimeout(() => {
       const font = this.add.retroFont("font:main", 32, 32, Phaser.RetroFont.TEXT_SET2, 10);
@@ -27,7 +29,7 @@ class MenuState extends Phaser.State {
       this.input.onDown.add(() => {
         this.state.start("game");
       });
-    }, 10000);
+    }, FADE_DELAY);
   }
 }
 

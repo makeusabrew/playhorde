@@ -1,6 +1,6 @@
 {"frames": {
 
-"idle/survivor-idle_knife_0.png":
+"idle_0.png":
 {
 	"frame": {"x":1166,"y":534,"w":233,"h":171},
 	"rotated": false,
@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":38,"y":19,"w":233,"h":171},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_1.png":
+"idle_1.png":
 {
 	"frame": {"x":694,"y":582,"w":233,"h":171},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":38,"y":19,"w":233,"h":171},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_2.png":
+"idle_2.png":
 {
 	"frame": {"x":458,"y":412,"w":234,"h":172},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":234,"h":172},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_3.png":
+"idle_3.png":
 {
 	"frame": {"x":694,"y":408,"w":234,"h":172},
 	"rotated": false,
@@ -32,7 +32,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":234,"h":172},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_4.png":
+"idle_4.png":
 {
 	"frame": {"x":1167,"y":359,"w":235,"h":173},
 	"rotated": false,
@@ -40,7 +40,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":235,"h":173},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_5.png":
+"idle_5.png":
 {
 	"frame": {"x":930,"y":348,"w":235,"h":174},
 	"rotated": false,
@@ -48,7 +48,7 @@
 	"spriteSourceSize": {"x":37,"y":17,"w":235,"h":174},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_6.png":
+"idle_6.png":
 {
 	"frame": {"x":1172,"y":183,"w":236,"h":174},
 	"rotated": false,
@@ -56,7 +56,7 @@
 	"spriteSourceSize": {"x":36,"y":17,"w":236,"h":174},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_7.png":
+"idle_7.png":
 {
 	"frame": {"x":1,"y":995,"w":237,"h":174},
 	"rotated": false,
@@ -64,7 +64,7 @@
 	"spriteSourceSize": {"x":36,"y":17,"w":237,"h":174},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_8.png":
+"idle_8.png":
 {
 	"frame": {"x":1,"y":819,"w":237,"h":174},
 	"rotated": false,
@@ -72,7 +72,7 @@
 	"spriteSourceSize": {"x":36,"y":17,"w":237,"h":174},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_9.png":
+"idle_9.png":
 {
 	"frame": {"x":1,"y":641,"w":237,"h":176},
 	"rotated": false,
@@ -80,7 +80,7 @@
 	"spriteSourceSize": {"x":36,"y":16,"w":237,"h":176},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_10.png":
+"idle_10.png":
 {
 	"frame": {"x":1,"y":463,"w":237,"h":176},
 	"rotated": false,
@@ -88,7 +88,7 @@
 	"spriteSourceSize": {"x":36,"y":16,"w":237,"h":176},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_11.png":
+"idle_11.png":
 {
 	"frame": {"x":1,"y":641,"w":237,"h":176},
 	"rotated": false,
@@ -96,7 +96,7 @@
 	"spriteSourceSize": {"x":36,"y":16,"w":237,"h":176},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_12.png":
+"idle_12.png":
 {
 	"frame": {"x":1,"y":819,"w":237,"h":174},
 	"rotated": false,
@@ -104,7 +104,7 @@
 	"spriteSourceSize": {"x":36,"y":17,"w":237,"h":174},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_13.png":
+"idle_13.png":
 {
 	"frame": {"x":1,"y":995,"w":237,"h":174},
 	"rotated": false,
@@ -112,7 +112,7 @@
 	"spriteSourceSize": {"x":36,"y":17,"w":237,"h":174},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_14.png":
+"idle_14.png":
 {
 	"frame": {"x":1172,"y":183,"w":236,"h":174},
 	"rotated": false,
@@ -120,7 +120,7 @@
 	"spriteSourceSize": {"x":36,"y":17,"w":236,"h":174},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_15.png":
+"idle_15.png":
 {
 	"frame": {"x":930,"y":348,"w":235,"h":174},
 	"rotated": false,
@@ -128,7 +128,7 @@
 	"spriteSourceSize": {"x":37,"y":17,"w":235,"h":174},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_16.png":
+"idle_16.png":
 {
 	"frame": {"x":1167,"y":359,"w":235,"h":173},
 	"rotated": false,
@@ -136,7 +136,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":235,"h":173},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_17.png":
+"idle_17.png":
 {
 	"frame": {"x":694,"y":408,"w":234,"h":172},
 	"rotated": false,
@@ -144,7 +144,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":234,"h":172},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_18.png":
+"idle_18.png":
 {
 	"frame": {"x":458,"y":412,"w":234,"h":172},
 	"rotated": false,
@@ -152,7 +152,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":234,"h":172},
 	"sourceSize": {"w":289,"h":224}
 },
-"idle/survivor-idle_knife_19.png":
+"idle_19.png":
 {
 	"frame": {"x":694,"y":582,"w":233,"h":171},
 	"rotated": false,
@@ -160,7 +160,7 @@
 	"spriteSourceSize": {"x":38,"y":19,"w":233,"h":171},
 	"sourceSize": {"w":289,"h":224}
 },
-"meleeattack/survivor-meleeattack_knife_0.png":
+"attack_0.png":
 {
 	"frame": {"x":929,"y":702,"w":233,"h":171},
 	"rotated": false,
@@ -168,7 +168,7 @@
 	"spriteSourceSize": {"x":35,"y":19,"w":233,"h":171},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_1.png":
+"attack_1.png":
 {
 	"frame": {"x":473,"y":758,"w":223,"h":172},
 	"rotated": false,
@@ -176,7 +176,7 @@
 	"spriteSourceSize": {"x":36,"y":20,"w":223,"h":172},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_2.png":
+"attack_2.png":
 {
 	"frame": {"x":1410,"y":187,"w":193,"h":171},
 	"rotated": false,
@@ -184,7 +184,7 @@
 	"spriteSourceSize": {"x":38,"y":23,"w":193,"h":171},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_3.png":
+"attack_3.png":
 {
 	"frame": {"x":1404,"y":360,"w":186,"h":177},
 	"rotated": false,
@@ -192,7 +192,7 @@
 	"spriteSourceSize": {"x":39,"y":20,"w":186,"h":177},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_4.png":
+"attack_4.png":
 {
 	"frame": {"x":1439,"y":1,"w":176,"h":184},
 	"rotated": false,
@@ -200,7 +200,7 @@
 	"spriteSourceSize": {"x":41,"y":15,"w":176,"h":184},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_5.png":
+"attack_5.png":
 {
 	"frame": {"x":247,"y":439,"w":173,"h":179},
 	"rotated": false,
@@ -208,7 +208,7 @@
 	"spriteSourceSize": {"x":38,"y":20,"w":173,"h":179},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_6.png":
+"attack_6.png":
 {
 	"frame": {"x":247,"y":259,"w":209,"h":178},
 	"rotated": false,
@@ -216,7 +216,7 @@
 	"spriteSourceSize": {"x":48,"y":20,"w":209,"h":178},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_7.png":
+"attack_7.png":
 {
 	"frame": {"x":923,"y":1,"w":264,"h":171},
 	"rotated": false,
@@ -224,7 +224,7 @@
 	"spriteSourceSize": {"x":49,"y":23,"w":264,"h":171},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_8.png":
+"attack_8.png":
 {
 	"frame": {"x":444,"y":1,"w":242,"h":231},
 	"rotated": false,
@@ -232,7 +232,7 @@
 	"spriteSourceSize": {"x":44,"y":19,"w":242,"h":231},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_9.png":
+"attack_9.png":
 {
 	"frame": {"x":1,"y":1,"w":216,"h":268},
 	"rotated": false,
@@ -240,7 +240,7 @@
 	"spriteSourceSize": {"x":41,"y":18,"w":216,"h":268},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_10.png":
+"attack_10.png":
 {
 	"frame": {"x":219,"y":1,"w":223,"h":256},
 	"rotated": false,
@@ -248,7 +248,7 @@
 	"spriteSourceSize": {"x":40,"y":18,"w":223,"h":256},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_11.png":
+"attack_11.png":
 {
 	"frame": {"x":688,"y":1,"w":233,"h":227},
 	"rotated": false,
@@ -256,7 +256,7 @@
 	"spriteSourceSize": {"x":38,"y":18,"w":233,"h":227},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_12.png":
+"attack_12.png":
 {
 	"frame": {"x":1,"y":271,"w":244,"h":190},
 	"rotated": false,
@@ -264,7 +264,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":244,"h":190},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_13.png":
+"attack_13.png":
 {
 	"frame": {"x":1189,"y":1,"w":248,"h":180},
 	"rotated": false,
@@ -272,7 +272,7 @@
 	"spriteSourceSize": {"x":36,"y":18,"w":248,"h":180},
 	"sourceSize": {"w":329,"h":300}
 },
-"meleeattack/survivor-meleeattack_knife_14.png":
+"attack_14.png":
 {
 	"frame": {"x":930,"y":174,"w":240,"h":172},
 	"rotated": false,
@@ -280,7 +280,7 @@
 	"spriteSourceSize": {"x":35,"y":19,"w":240,"h":172},
 	"sourceSize": {"w":329,"h":300}
 },
-"move/survivor-move_knife_0.png":
+"walk_0.png":
 {
 	"frame": {"x":1401,"y":539,"w":217,"h":171},
 	"rotated": false,
@@ -288,7 +288,7 @@
 	"spriteSourceSize": {"x":38,"y":18,"w":217,"h":171},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_1.png":
+"walk_1.png":
 {
 	"frame": {"x":1377,"y":1056,"w":217,"h":171},
 	"rotated": false,
@@ -296,7 +296,7 @@
 	"spriteSourceSize": {"x":38,"y":18,"w":217,"h":171},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_2.png":
+"walk_2.png":
 {
 	"frame": {"x":473,"y":586,"w":219,"h":170},
 	"rotated": false,
@@ -304,7 +304,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":219,"h":170},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_3.png":
+"walk_3.png":
 {
 	"frame": {"x":1387,"y":884,"w":222,"h":170},
 	"rotated": false,
@@ -312,7 +312,7 @@
 	"spriteSourceSize": {"x":36,"y":18,"w":222,"h":170},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_4.png":
+"walk_4.png":
 {
 	"frame": {"x":931,"y":1102,"w":224,"h":169},
 	"rotated": false,
@@ -320,7 +320,7 @@
 	"spriteSourceSize": {"x":36,"y":18,"w":224,"h":169},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_5.png":
+"walk_5.png":
 {
 	"frame": {"x":934,"y":875,"w":226,"h":171},
 	"rotated": false,
@@ -328,7 +328,7 @@
 	"spriteSourceSize": {"x":35,"y":18,"w":226,"h":171},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_6.png":
+"walk_6.png":
 {
 	"frame": {"x":474,"y":932,"w":229,"h":172},
 	"rotated": false,
@@ -336,7 +336,7 @@
 	"spriteSourceSize": {"x":34,"y":18,"w":229,"h":172},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_7.png":
+"walk_7.png":
 {
 	"frame": {"x":240,"y":796,"w":231,"h":174},
 	"rotated": false,
@@ -344,7 +344,7 @@
 	"spriteSourceSize": {"x":33,"y":18,"w":231,"h":174},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_8.png":
+"walk_8.png":
 {
 	"frame": {"x":240,"y":972,"w":232,"h":174},
 	"rotated": false,
@@ -352,7 +352,7 @@
 	"spriteSourceSize": {"x":33,"y":19,"w":232,"h":174},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_9.png":
+"walk_9.png":
 {
 	"frame": {"x":930,"y":524,"w":234,"h":176},
 	"rotated": false,
@@ -360,7 +360,7 @@
 	"spriteSourceSize": {"x":32,"y":19,"w":234,"h":176},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_10.png":
+"walk_10.png":
 {
 	"frame": {"x":458,"y":234,"w":234,"h":176},
 	"rotated": false,
@@ -368,7 +368,7 @@
 	"spriteSourceSize": {"x":32,"y":19,"w":234,"h":176},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_11.png":
+"walk_11.png":
 {
 	"frame": {"x":694,"y":230,"w":234,"h":176},
 	"rotated": false,
@@ -376,7 +376,7 @@
 	"spriteSourceSize": {"x":32,"y":19,"w":234,"h":176},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_12.png":
+"walk_12.png":
 {
 	"frame": {"x":1164,"y":707,"w":232,"h":174},
 	"rotated": false,
@@ -384,7 +384,7 @@
 	"spriteSourceSize": {"x":33,"y":19,"w":232,"h":174},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_13.png":
+"walk_13.png":
 {
 	"frame": {"x":240,"y":620,"w":231,"h":174},
 	"rotated": false,
@@ -392,7 +392,7 @@
 	"spriteSourceSize": {"x":33,"y":18,"w":231,"h":174},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_14.png":
+"walk_14.png":
 {
 	"frame": {"x":698,"y":755,"w":229,"h":172},
 	"rotated": false,
@@ -400,7 +400,7 @@
 	"spriteSourceSize": {"x":34,"y":18,"w":229,"h":172},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_15.png":
+"walk_15.png":
 {
 	"frame": {"x":705,"y":929,"w":227,"h":171},
 	"rotated": false,
@@ -408,7 +408,7 @@
 	"spriteSourceSize": {"x":35,"y":18,"w":227,"h":171},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_16.png":
+"walk_16.png":
 {
 	"frame": {"x":705,"y":1102,"w":224,"h":169},
 	"rotated": false,
@@ -416,7 +416,7 @@
 	"spriteSourceSize": {"x":36,"y":18,"w":224,"h":169},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_17.png":
+"walk_17.png":
 {
 	"frame": {"x":1162,"y":883,"w":223,"h":170},
 	"rotated": false,
@@ -424,7 +424,7 @@
 	"spriteSourceSize": {"x":36,"y":18,"w":223,"h":170},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_18.png":
+"walk_18.png":
 {
 	"frame": {"x":1398,"y":712,"w":220,"h":170},
 	"rotated": false,
@@ -432,7 +432,7 @@
 	"spriteSourceSize": {"x":37,"y":18,"w":220,"h":170},
 	"sourceSize": {"w":279,"h":219}
 },
-"move/survivor-move_knife_19.png":
+"walk_19.png":
 {
 	"frame": {"x":1157,"y":1055,"w":218,"h":171},
 	"rotated": false,

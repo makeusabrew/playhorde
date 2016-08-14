@@ -1,7 +1,10 @@
 import Phaser from "phaser";
+import EventEmitter from "eventemitter3";
 
-export default class Entity {
+export default class Entity extends EventEmitter {
   constructor() {
+    super();
+
     this.x = 0;
     this.y = 0;
     this.a = 0;
@@ -46,5 +49,7 @@ export default class Entity {
 
   receiveDamage(damage) {
     this.health -= damage;
+
+    // @TODO emit death event if health <= 0 ?
   }
 }
