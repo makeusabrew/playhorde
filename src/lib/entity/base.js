@@ -7,6 +7,7 @@ export default class Entity {
     this.a = 0;
     this.vx = 0;
     this.vy = 0;
+    this.r = 0;
   }
 
   getPosition() {

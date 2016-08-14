@@ -4,6 +4,8 @@ export default class Weapon {
 
     // an absolute time value when this weapon will be ready again
     this.readyAt = 0;
+
+    this.type = "melee";
   }
 
   isBusy() {

@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Entity from "./base";
+import ZombieArms from "../weapon/zombie-arms";
 import {random, frandom} from "../util";
 
 const Point = Phaser.Point;
@@ -13,6 +14,8 @@ export default class Zombie extends Entity {
     this.awarenessRadius = random(50, 200);
     this.speed = frandom(0.3, 0.8);
     this.visibleRange = random(200, 1500);
+
+    this.arms = new ZombieArms();
   }
 
   // be generic; we don't have to attack a player, just any entity
@@ -24,15 +27,9 @@ export default class Zombie extends Entity {
     // always be on the lookout
     this.checkForTarget();
     // think
-    this[this.state.get()](now);
+    this[`_${this.state.get()}`](now);
     // move
     super.tick();
-  }
-
-  idle(now) {
-    if (now - this.state.time() >= 5e3 + Math.random() * 20e3) {
-      this.state.set("roaming");
-    }
   }
 
   checkForTarget() {
@@ -47,7 +44,13 @@ export default class Zombie extends Entity {
     }
   }
 
-  roaming() {
+  _idle(now) {
+    if (now - this.state.time() >= 5e3 + Math.random() * 20e3) {
+      this.state.set("roaming");
+    }
+  }
+
+  _roaming() {
     // if we don't have anywhere to head to, pick a random point
     // sort of near us
     if (!this.destination) {
@@ -87,11 +90,12 @@ export default class Zombie extends Entity {
     }
   }
 
-  tracking() {
+  _tracking() {
+    const target = this.target;
     // if we're tracking then we have to continuously update our
     // heading towards wherever our target is
     const radAngle = Point.angle(
-      this.target.getPoint(),
+      target.getPoint(),
       this.getPoint()
     );
 
@@ -100,31 +104,34 @@ export default class Zombie extends Entity {
     this.vx = Math.cos(radAngle) * this.speed;
     this.vy = Math.sin(radAngle) * this.speed;
 
-    const distance = Point.distance(this.getPoint(), this.target.getPoint());
+    const distance = Point.distance(this.getPoint(), target.getPoint());
 
     // we've lost sight of our target, roam instead
     if (distance >= this.visibleRange) {
       return this.state.set("roaming");
     }
 
-    // this should probably account for the size of the target
-    if (distance <= 30) {
+    if (distance <= target.r) {
       this.vx = 0;
       this.vy = 0;
       return this.state.set("attacking");
     }
   }
 
-  attacking() {
-    const distance = Point.distance(this.getPoint(), this.target.getPoint());
+  _attacking() {
+    const target = this.target;
+    const distance = Point.distance(this.getPoint(), target.getPoint());
 
-    // @TODO account for size of target
-    if (distance > 30) {
+    if (!this.arms.isBusy()) {
+      this.arms.fire();
+    }
+
+    if (distance > target.r) {
       this.state.set("tracking");
     }
   }
 
   isAttacking() {
-    return this.state.get() === "attacking";
+    return this.arms.isBusy();
   }
 }

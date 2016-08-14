@@ -3,6 +3,7 @@ import Entity from "./base";
 export default class Player extends Entity {
   constructor() {
     super();
+    this.r = 30;
     this.cWeapon = 0;
     this.weapons = [];
   }
