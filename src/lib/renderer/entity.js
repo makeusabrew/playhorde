@@ -11,22 +11,31 @@ export default class EntityRenderer {
     this.sprite = sprite;
     this.entity = entity;
 
+    this.animated = false;
     this.animMeta = {};
     this.currentAnim = null;
   }
 
   reconcile() {
-    if (this.entity.isAttacking() && this.getAnimation("attack")) {
-      this.setAnimation("attack");
-    } else if (this.entity.hasVelocity()) {
-      this.setAnimation("walk");
-    } else {
-      this.setAnimation("idle");
+    let offsetX = 0;
+    let offsetY = 0;
+
+    if (this.animated) {
+      if (this.entity.isAttacking() && this.getAnimation("attack")) {
+        this.setAnimation("attack");
+      } else if (this.entity.hasVelocity()) {
+        this.setAnimation("walk");
+      } else {
+        this.setAnimation("idle");
+      }
+
+      offsetX = this.animMeta[this.currentAnim].offsetX;
+      offsetY = this.animMeta[this.currentAnim].offsetY;
     }
 
-    const {offsetX, offsetY} = this.animMeta[this.currentAnim];
-
     const {x, y, a} = this.entity.getPosition();
+
+    //const aRad = Phaser.Math.degToRad(a);
 
     this.sprite.x = x + offsetX;
     this.sprite.y = y + offsetY;
@@ -38,6 +47,7 @@ export default class EntityRenderer {
     this.animMeta[name] = {
       offsetX, offsetY
     };
+    this.animated = true;
   }
 
   setAnimation(name) {

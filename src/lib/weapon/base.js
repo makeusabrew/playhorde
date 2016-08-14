@@ -16,4 +16,8 @@ export default class Weapon extends EventEmitter {
 
   fire() {
   }
+
+  isInDamagePhase() {
+    return false;
+  }
 }

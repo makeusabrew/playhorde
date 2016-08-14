@@ -28,7 +28,9 @@ export default class Player extends Entity {
 
     // we need to tell the weapon where it's being fired from and
     // what direction it's facing
-    weapon.fire(this.getPosition());
+    // @TODO: probably better just to pass the entity so we can track
+    // ownership, particularly for weapon projectiles
+    return weapon.fire(this.getPosition());
   }
 
   isAttacking() {

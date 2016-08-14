@@ -6,6 +6,7 @@ import Player from "../entity/player";
 import Zombie from "../entity/zombie";
 
 import Knife from "../weapon/knife";
+import Handgun from "../weapon/handgun";
 
 import EntityState from "../entity-state";
 
@@ -25,6 +26,7 @@ class MainState extends Phaser.State {
 
     // and and equip a knife
     this.player.addWeapon(new Knife(), true);
+    this.player.addWeapon(new Handgun(), true);
 
     EntityManager.add(this.player);
 
@@ -67,7 +69,8 @@ class MainState extends Phaser.State {
     playerKnife.addAnimation("walk", 0, 19, 20);
 
     // last two params are X and Y offsets
-    playerKnife.addAnimation("attack", 0, 14, 20, 5, 7);
+    // @FIXME not working well at all
+    playerKnife.addAnimation("attack", 0, 14, 20, 0, 0);
 
     // @TODO: need some way of a) grouping sprites ourselves and b) setting which sprite of
     // a group is the currently active layer
@@ -154,7 +157,20 @@ class MainState extends Phaser.State {
     }
 
     if (this.space.isDown) {
-      this.player.attack();
+      // we might get an entity back from the attack method
+      const result = this.player.attack();
+
+      if (result) {
+        EntityManager.add(result);
+        if (result.getType() === "Bullet") {
+          const bRenderer = new EntityRenderer(
+            result,
+            this.add.sprite(0, 0, "bullet"),
+            0.5
+          );
+          this.renderers.push(bRenderer);
+        }
+      }
     }
 
     const now = Date.now();

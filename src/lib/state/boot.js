@@ -18,6 +18,7 @@ class BootState extends Phaser.State {
     this.load.audiosprite("zombies", "/assets/sound/zombies.mp3", "/assets/sound/zombies.json");
 
     this.load.image("font:main", "/assets/img/bluepink_font.png");
+    this.load.image("bullet", "/assets/img/bullet.png");
 
     this.load.audio("music", "/assets/music/horrorland.mp3");
   }

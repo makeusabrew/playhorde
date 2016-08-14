@@ -52,4 +52,8 @@ export default class Entity extends EventEmitter {
 
     // @TODO emit death event if health <= 0 ?
   }
+
+  getType() {
+    return this.constructor.name;
+  }
 }
