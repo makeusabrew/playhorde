@@ -15,18 +15,26 @@ class MainState extends Phaser.State {
   }
 
   create() {
+    // a global track of all entities; these are the actual 'living' thinking things
+    // in the game, including the player
+    this.entities = [];
+
+    // a global track of all entity renderers, which simply take care of the presentation
+    // of entities without cluttering up the entity classes with any rendering logic
     this.renderers = [];
 
+    // set up the player
     this.player = new Player();
     this.player.x = 250;
     this.player.y = 50;
     this.player.addWeapon(new Knife(), true);
 
-    this.map = this.add.tilemap("level1");
+    this.entities.push(this.player);
 
+    // phaser map stuff
+    this.map = this.add.tilemap("level1");
     // param1 - name of tileset in JSON, param2 our cache key
     this.map.addTilesetImage("medieval", "tiles");
-
     // has to match the name of a layer in the JSON
     this.layer = this.map.createLayer("background");
 
@@ -62,9 +70,8 @@ class MainState extends Phaser.State {
 
     this.space = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
 
-    this.zombies = [];
-
-    for (var i = 0; i < 10; i++) {
+    // temporarily set up some random zombies
+    for (let i = 0; i < 10; i++) {
       const zombie = new Zombie();
 
       zombie.x = 100 + (i*50);
@@ -90,7 +97,7 @@ class MainState extends Phaser.State {
 
       this.renderers.push(new EntityRenderer(zombie, zSprite, 0.2));
 
-      this.zombies.push(zombie);
+      this.entities.push(zombie);
     }
   }
 
@@ -137,9 +144,7 @@ class MainState extends Phaser.State {
 
     const now = Date.now();
 
-    this.player.tick();
-
-    this.zombies.forEach(zombie => zombie.tick(now));
+    this.entities.forEach(entity => entity.tick(now));
 
     this.renderers.forEach(renderer => renderer.reconcile());
 
