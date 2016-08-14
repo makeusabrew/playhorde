@@ -21,10 +21,14 @@ export default class Player extends Entity {
 
   attack() {
     const weapon = this.weapons[this.cWeapon];
+
     if (weapon.isBusy()) {
       return;
     }
-    weapon.fire();
+
+    // we need to tell the weapon where it's being fired from and
+    // what direction it's facing
+    weapon.fire(this.getPosition());
   }
 
   isAttacking() {

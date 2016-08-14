@@ -9,12 +9,10 @@ import Knife from "../weapon/knife";
 
 import EntityState from "../entity-state";
 
+import EntityManager from "../manager/entity";
+
 class MainState extends Phaser.State {
   create() {
-    // a global track of all entities; these are the actual 'living' thinking things
-    // in the game, including the player
-    this.entities = [];
-
     // a global track of all entity renderers, which simply take care of the presentation
     // of entities without cluttering up the entity classes with any rendering logic
     this.renderers = [];
@@ -28,7 +26,7 @@ class MainState extends Phaser.State {
     // and and equip a knife
     this.player.addWeapon(new Knife(), true);
 
-    this.entities.push(this.player);
+    EntityManager.add(this.player);
 
     // phaser map stuff
     this.map = this.add.tilemap("level1");
@@ -71,6 +69,9 @@ class MainState extends Phaser.State {
     // last two params are X and Y offsets
     playerKnife.addAnimation("attack", 0, 14, 20, 5, 7);
 
+    // @TODO: need some way of a) grouping sprites ourselves and b) setting which sprite of
+    // a group is the currently active layer
+
     this.renderers.push(playerKnife);
 
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -110,7 +111,7 @@ class MainState extends Phaser.State {
 
       this.renderers.push(zombieRenderer);
 
-      this.entities.push(zombie);
+      EntityManager.add(zombie);
     }
   }
 
@@ -158,7 +159,7 @@ class MainState extends Phaser.State {
 
     const now = Date.now();
 
-    this.entities.forEach(entity => entity.tick(now));
+    EntityManager.all(entity => entity.tick(now));
 
     if (this.player.isAttacking()) {
       // @TODO weapons differ... a lot
@@ -172,6 +173,7 @@ class MainState extends Phaser.State {
       if (pWeapon.isInDamagePhase(now)) {
 
         // this is so rubbish... but it's a start
+        /*
         this.entities
         .filter(e => e.constructor.name === "Zombie" && pWeapon.isHitting(this.player, e))
         // does an entity receive damage, or a weapon deal damage?
@@ -187,6 +189,7 @@ class MainState extends Phaser.State {
             r.destroy();
           }
         });
+        */
       }
     }
 
