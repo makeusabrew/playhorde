@@ -1,5 +1,8 @@
 import EventEmitter from "eventemitter3";
 
+// @NOTE: nothing to do with Phaser.State stuff. Probably
+// needs renaming...
+
 export default class EntityState extends EventEmitter {
   constructor(current) {
     super();
