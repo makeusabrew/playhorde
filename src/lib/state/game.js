@@ -6,8 +6,6 @@ import Zombie from "../entity/zombie";
 import Knife from "../weapon/knife";
 import Handgun from "../weapon/handgun";
 
-import EntityState from "../entity/state/base";
-
 import EntityManager from "../manager/entity";
 
 // a global track of all entity renderers, which simply take care of the presentation
@@ -63,15 +61,11 @@ class MainState extends Phaser.State {
 
       zombie.setTarget(this.player);
 
-      const state = new EntityState("idle");
-
-      state.on("change", next => {
+      zombie.on("state:change", next => {
         if (next === "attacking") {
           fx.play("zombie-2");
         }
       });
-
-      zombie.state = state;
 
       EntityManager.add(zombie);
       RenderManager.add(zombie, this);

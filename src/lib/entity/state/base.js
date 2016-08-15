@@ -1,32 +1,16 @@
-import EventEmitter from "eventemitter3";
-
-// @NOTE: nothing to do with Phaser.State stuff. Probably
-// needs renaming...
-
-export default class EntityState extends EventEmitter {
-  constructor(current) {
+export default class EntityState {
+  constructor() {
     super();
-    this.prev = null;
-    this.current = null;
-    this.next = null;
-
-    if (current) {
-      this.set(current);
-    }
+    this.time = Date.now();
   }
 
-  set(state) {
-    this.prev = this.current;
-    this.current = state;
-    this.stateTime = Date.now();
-    this.emit("change", this.current, this.prev);
+  enter(entity) {
   }
 
-  get() {
-    return this.current;
+  exit(entity) {
   }
 
-  time() {
-    return this.stateTime;
+  run(entity) {
+    throw new Error("Not implemented");
   }
 }
