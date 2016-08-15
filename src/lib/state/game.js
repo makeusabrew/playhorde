@@ -6,7 +6,7 @@ import Zombie from "../entity/zombie";
 import Knife from "../weapon/knife";
 import Handgun from "../weapon/handgun";
 
-import EntityState from "../entity-state";
+import EntityState from "../entity/state/base";
 
 import EntityManager from "../manager/entity";
 
