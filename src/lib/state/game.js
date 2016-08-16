@@ -28,8 +28,6 @@ class MainState extends Phaser.State {
     this.player.addWeapon(new Knife(), true);
     this.player.addWeapon(new Handgun(), true);
 
-    EntityManager.add(this.player);
-
     // phaser map stuff
     this.map = this.add.tilemap("level1");
     // param1 - name of tileset in JSON, param2 our cache key
@@ -52,7 +50,7 @@ class MainState extends Phaser.State {
 
     this.space = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
 
-    RenderManager.add(this.player, this);
+    EntityManager.add(this.player, this);
 
     this.time.events.loop(2000, () => {
       if (random(0, 3) !== 0) {
@@ -90,8 +88,7 @@ class MainState extends Phaser.State {
         }
       });
 
-      EntityManager.add(zombie);
-      RenderManager.add(zombie, this);
+      EntityManager.add(zombie, this);
 
       debug("Spawned zombie %d at %d,%d", zombie._id, zombie.x, zombie.y);
     });
@@ -140,15 +137,11 @@ class MainState extends Phaser.State {
       const result = this.player.attack();
 
       if (result) {
-        EntityManager.add(result);
-        RenderManager.add(result, this);
+        EntityManager.add(result, this);
       }
     }
 
-    const now = Date.now();
-
-    EntityManager.all(entity => entity.tick(now));
-
+    /*
     if (this.player.isAttacking()) {
       // @TODO weapons differ... a lot
 
@@ -161,7 +154,6 @@ class MainState extends Phaser.State {
       if (pWeapon.isInDamagePhase(now)) {
 
         // this is so rubbish... but it's a start
-        /*
         this.entities
         .filter(e => e.constructor.name === "Zombie" && pWeapon.isHitting(this.player, e))
         // does an entity receive damage, or a weapon deal damage?
@@ -177,11 +169,43 @@ class MainState extends Phaser.State {
             r.destroy();
           }
         });
-        */
       }
     }
+    */
 
-    RenderManager.all(renderer => renderer.reconcile());
+    const now = Date.now();
+
+    EntityManager.tick(now);
+
+    const bullets = EntityManager.getByType("Bullet");
+    const zombies = EntityManager.getByType("Zombie");
+
+    bullets.forEach(b => {
+      zombies.forEach(z => {
+        if (b.getRect().intersects(z.getRect())) {
+          debug("bullet %d hitting zombie %d", b._id, z._id);
+
+          z.health -= b.damage;
+
+          b.kill();
+          EntityManager.remove(b);
+
+          if (z.health <= 0) {
+            debug("zombie %d is dead", z._id);
+            z.kill();
+            EntityManager.remove(z);
+          }
+        }
+      });
+
+      if (b.alive && (b.x < 0 || b.x > 3200 || b.y < 0 || b.y > 3200)) {
+        debug("bullet %d offscreen, killing", b._id);
+        b.kill();
+        EntityManager.remove(b);
+      }
+    });
+
+    EntityManager.render();
 
     this.camera.focusOn(this.player);
   }

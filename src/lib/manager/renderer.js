@@ -68,5 +68,16 @@ export default {
     renderers.push(r);
   },
 
-  all: (callback => renderers.forEach(callback))
+  reconcile: () => {
+    renderers.forEach(r => r.reconcile());
+  },
+
+  remove: entity => {
+    const target = renderers.findIndex(r => r.entity === entity);
+    if (target === -1) {
+      return;
+    }
+    renderers[target].destroy();
+    renderers.splice(target, 1);
+  }
 };

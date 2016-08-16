@@ -12,6 +12,7 @@ export default class Entity extends EventEmitter {
     this.vy = 0;
     this.r = 0;
     this.health = 0;
+    this.alive = true;
   }
 
   getPosition() {
@@ -26,6 +27,10 @@ export default class Entity extends EventEmitter {
 
   getPoint() {
     return new Phaser.Point(this.x, this.y);
+  }
+
+  getRect() {
+    return new Phaser.Rectangle(this.x - this.r, this.y - this.r, this.r, this.r);
   }
 
   hasVelocity() {
@@ -47,13 +52,14 @@ export default class Entity extends EventEmitter {
     return false;
   }
 
-  receiveDamage(damage) {
-    this.health -= damage;
-
-    // @TODO emit death event if health <= 0 ?
-  }
-
   getType() {
     return this.constructor.name;
+  }
+
+  spawn() {
+  }
+
+  kill() {
+    this.alive = false;
   }
 }

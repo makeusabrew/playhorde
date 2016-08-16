@@ -37,6 +37,7 @@ export default class Zombie extends Entity {
 
     this.state = new IdleState();
     this.state.enter(this);
+    this.r = 30;
   }
 
   // be generic; we don't have to attack a player, just any entity
@@ -79,7 +80,6 @@ export default class Zombie extends Entity {
         return true;
       }
     }
-
 
     if (distance <= this.hearing) {
       // @TODO: logic
