@@ -14,6 +14,8 @@ import RenderManager from "../manager/renderer";
 
 import {random} from "../util";
 
+const debug = require("debug")("horde:state:game");
+
 class MainState extends Phaser.State {
   create() {
     // set up the player
@@ -81,6 +83,7 @@ class MainState extends Phaser.State {
       zombie.setTarget(this.player);
 
       zombie.on("state:change", next => {
+        debug("zombie %d state %s", zombie._id, next);
         if (next === "attacking") {
           fx.play("zombie-2");
         }
@@ -89,7 +92,7 @@ class MainState extends Phaser.State {
       EntityManager.add(zombie);
       RenderManager.add(zombie, this);
 
-      console.log("Spawned zombie at %d,%d", zombie.x, zombie.y);
+      debug("Spawned zombie %d at %d,%d", zombie._id, zombie.x, zombie.y);
     });
   }
 

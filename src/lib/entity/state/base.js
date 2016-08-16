@@ -18,7 +18,7 @@ export default class EntityState {
   }
 
   name() {
-    return this.constructor.name.match(/^(\w+)State$/)[1];
+    return this.constructor.name.match(/^(\w+)State$/)[1].toLowerCase();
   }
 
   set(state) {
