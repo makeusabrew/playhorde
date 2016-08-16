@@ -1,6 +1,8 @@
 import State from "../base";
 import RoamingState from "./roaming";
 import TrackingState from "./tracking";
+import HomingState from "./homing";
+import {random} from "../../../util";
 
 export default class IdleState extends State {
   execute() {
@@ -15,8 +17,18 @@ export default class IdleState extends State {
     zombie.vx = 0;
     zombie.vy = 0;
 
-    if (now - this.time >= 5e3 + Math.random() * 20e3) {
-      this.set(new RoamingState());
+    if (now - this.time >= random(5e3, 30e3)) {
+      const next = random(0, 3);
+
+      if (next === 0) {
+        return this.set(new RoamingState());
+      }
+
+      if (next === 1) {
+        return this.set(new IdleState());
+      }
+
+      return this.set(new HomingState());
     }
   }
 }

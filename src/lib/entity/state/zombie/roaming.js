@@ -14,10 +14,13 @@ export default class RoamingState extends State {
   enter(zombie) {
     super.enter(zombie);
 
-    this.destination = new Point(
-      zombie.x + (Math.floor(Math.random() * 301) - 150),
-      zombie.y + (Math.floor(Math.random() * 301) - 150)
-    );
+    // allow for a destination to have been set externally
+    if (!this.destination) {
+      this.destination = new Point(
+        zombie.x + (Math.floor(Math.random() * 301) - 150),
+        zombie.y + (Math.floor(Math.random() * 301) - 150)
+      );
+    }
 
     const radAngle = Point.angle(
       // order matters here otherwise we get the opposite (wrong) heading

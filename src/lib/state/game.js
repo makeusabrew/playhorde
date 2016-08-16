@@ -26,7 +26,7 @@ class MainState extends Phaser.State {
 
     // and and equip a knife
     this.player.addWeapon(new Knife(), true);
-    //this.player.addWeapon(new Handgun(), true);
+    this.player.addWeapon(new Handgun(), true);
 
     EntityManager.add(this.player);
 
@@ -79,6 +79,8 @@ class MainState extends Phaser.State {
       zombie.y = random(rectangle[2], rectangle[3]);
       zombie.a = Math.floor(Math.random() * 360);
       zombie.health = 100 + Math.floor(Math.random() * 101);
+
+      zombie.home = new Phaser.Point(3200 / 2, 3200 / 2);
 
       zombie.setTarget(this.player);
 
