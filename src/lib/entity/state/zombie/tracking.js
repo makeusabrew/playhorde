@@ -1,15 +1,14 @@
 import Phaser from "phaser";
 import State from "../base";
+import AttackingState from "./attacking";
+import RoamingState from "./roaming";
 
 const Point = Phaser.Point;
 
 export default class TrackingState extends State {
-  enter(zombie) {
-    this.target = zombie.target;
-  }
-
   execute(zombie) {
-    const target = this.target;
+    const target = zombie.target;
+
     // if we're tracking then we have to continuously update our
     // heading towards wherever our target is
     const radAngle = Point.angle(
@@ -26,11 +25,11 @@ export default class TrackingState extends State {
 
     // we've lost sight of our target, roam instead
     if (distance >= zombie.visibleRange) {
-      return zombie.setState("roaming");
+      return this.set(new RoamingState());
     }
 
     if (distance <= target.r) {
-      return zombie.setState("attacking");
+      return this.set(new AttackingState());
     }
   }
 }

@@ -4,9 +4,6 @@ import ZombieArms from "../weapon/zombie-arms";
 import {random, frandom} from "../util";
 
 import IdleState from "./state/zombie/idle";
-import RoamingState from "./state/zombie/roaming";
-import TrackingState from "./state/zombie/tracking";
-import AttackingState from "./state/zombie/attacking";
 
 export default class Zombie extends Entity {
   constructor() {
@@ -20,47 +17,13 @@ export default class Zombie extends Entity {
 
     this.arms = new ZombieArms();
 
-    this.setState("idle");
+    this.state = new IdleState(this);
   }
 
   // be generic; we don't have to attack a player, just any entity
   setTarget(target) {
     this.target = target;
   }
-
-  setState(strState) {
-    let state;
-
-    switch (strState) {
-    case "idle":
-      state = new IdleState();
-      break;
-
-    case "roaming":
-      state = new RoamingState();
-      break;
-
-    case "tracking":
-      state = new TrackingState();
-      break;
-
-    case "attacking":
-      state = new AttackingState();
-      break;
-
-    default:
-      throw new Error (`No such zombie state ${strState}`);
-    }
-
-    if (this.state) {
-      this.state.exit(this);
-    }
-    this.state = state;
-    this.state.enter(this);
-
-    this.emit("state:change", strState);
-  }
-
 
   tick() {
     if (this.health <= 0) {

@@ -1,15 +1,12 @@
 import Phaser from "phaser";
 import State from "../base";
+import TrackingState from "./tracking";
 
 const Point = Phaser.Point;
 
 export default class AttackingState extends State {
-  enter(zombie) {
-    this.target = zombie.target;
-  }
-
   execute(zombie) {
-    const target = this.target;
+    const target = zombie.target;
     const distance = Point.distance(zombie.getPoint(), target.getPoint());
 
     zombie.vx = 0;
@@ -20,7 +17,7 @@ export default class AttackingState extends State {
     }
 
     if (distance > target.r) {
-      zombie.setState("tracking");
+      this.set(new TrackingState());
     }
   }
 }

@@ -1,16 +1,38 @@
 export default class EntityState {
-  constructor() {
-    super();
-    this.time = Date.now();
+  constructor(entity) {
+    this.time = null;
+    if (entity) {
+      this.enter(entity);
+    }
   }
 
   enter(entity) {
+    this.entity = entity;
+    this.time = Date.now();
   }
 
-  exit(entity) {
+  exit() {
   }
 
-  run(entity) {
-    throw new Error("Not implemented");
+  run() {
+  }
+
+  name() {
+    return this.constructor.name.match(/^(\w+)State$/)[1];
+  }
+
+  set(state) {
+    const entity = this.entity;
+    let oldStateName = null;
+
+    if (entity.state) {
+      oldStateName = entity.state.name();
+      entity.state.exit(entity);
+    }
+
+    entity.state = state;
+    entity.state.enter(entity);
+
+    entity.emit("state:change", entity.state.name(), oldStateName);
   }
 }
