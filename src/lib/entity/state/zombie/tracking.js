@@ -2,11 +2,15 @@ import Phaser from "phaser";
 import State from "../base";
 import AttackingState from "./attacking";
 import RoamingState from "./roaming";
+import Debug from "debug";
 
 const Point = Phaser.Point;
 
+const debug = Debug("horde:entity:zombie:state:tracking");
+
 export default class TrackingState extends State {
-  execute(zombie) {
+  execute() {
+    const zombie = this.entity;
     const target = zombie.target;
 
     // if we're tracking then we have to continuously update our
@@ -24,7 +28,8 @@ export default class TrackingState extends State {
     const distance = Point.distance(zombie.getPoint(), target.getPoint());
 
     // we've lost sight of our target, roam instead
-    if (distance >= zombie.visibleRange) {
+    if (distance >= zombie.visibility) {
+      debug("%d lost sight of target", zombie._id);
       return this.set(new RoamingState());
     }
 

@@ -5,7 +5,8 @@ import TrackingState from "./tracking";
 const Point = Phaser.Point;
 
 export default class AttackingState extends State {
-  execute(zombie) {
+  execute() {
+    const zombie = this.entity;
     const target = zombie.target;
     const distance = Point.distance(zombie.getPoint(), target.getPoint());
 

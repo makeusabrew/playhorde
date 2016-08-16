@@ -54,8 +54,7 @@ class MainState extends Phaser.State {
 
     RenderManager.add(this.player, this);
 
-
-    this.time.events.loop(3000, () => {
+    this.time.events.loop(2000, () => {
       if (random(0, 3) !== 0) {
         return;
       }

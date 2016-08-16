@@ -1,9 +1,14 @@
 import Phaser from "phaser";
 import Entity from "./base";
 import ZombieArms from "../weapon/zombie-arms";
-import {random, frandom} from "../util";
+import {random, frandom, isAngleContained} from "../util";
+import Debug from "debug";
 
 import IdleState from "./state/zombie/idle";
+
+const Point = Phaser.Point;
+
+const debug = Debug("horde:entity:zombie");
 
 export default class Zombie extends Entity {
   constructor() {
@@ -11,13 +16,27 @@ export default class Zombie extends Entity {
 
     this.target = null;
 
-    this.awarenessRadius = random(50, 200);
-    this.speed = frandom(0.3, 0.8);
-    this.visibleRange = random(200, 1500);
+    // @TODO make really small. Not used yet. Anything in this small range we'll
+    // know about even if it's quiet as a mouse or we're not facing it
+    this.awarenessRadius = random(50, 100);
+
+    this.speed = frandom(0.2, 0.9);
+
+    this.hearing = random(100, 401);
+
+    this.visibility = random(100, 501);
+    this.fov = random(50, 120);
+
+    // will determine how good we are at working stuff out / picking up clues
+    this.intelligence = random(50, 101);
+
+    // will determine how good we are at telling other zombies about stuff
+    this.communication = random(5, 101);
 
     this.arms = new ZombieArms();
 
-    this.state = new IdleState(this);
+    this.state = new IdleState();
+    this.state.enter(this);
   }
 
   // be generic; we don't have to attack a player, just any entity
@@ -31,7 +50,7 @@ export default class Zombie extends Entity {
     }
 
     // think
-    this.state.execute(this);
+    this.state.execute();
     // move
     super.tick();
   }
@@ -41,6 +60,36 @@ export default class Zombie extends Entity {
   }
 
   isTargetNear() {
-    return (Phaser.Point.distance(this.getPoint(), this.target.getPoint()) < this.awarenessRadius);
+    const distance = Point.distance(this.getPoint(), this.target.getPoint());
+
+    // these ifs are a bit ugly because they do trivial checks first (for speed)
+    // and *then* do the more complex detection inside the trivial test blocks
+
+    if (distance <= this.visibility) {
+      // calculate current FOV
+      const minA = (this.a - this.fov / 2) % 360;
+      const maxA = (this.a + this.fov / 2) % 360;
+
+      const targetA = Phaser.Math.radToDeg(
+        Point.angle(this.target.getPoint(), this.getPoint())
+      );
+
+      if (isAngleContained(minA, targetA, maxA)) {
+        debug("%d can see my target! Dist: %d, Angles: %d %d, %d", this._id, distance, minA, targetA, maxA);
+        return true;
+      }
+    }
+
+
+    if (distance <= this.hearing) {
+      // @TODO: logic
+      const isTargetMakingNoise = false;
+
+      if (isTargetMakingNoise) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

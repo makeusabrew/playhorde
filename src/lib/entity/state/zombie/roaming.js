@@ -6,11 +6,6 @@ import IdleState from "./idle";
 const Point = Phaser.Point;
 
 export default class RoamingState extends State {
-  constructor(zombie) {
-    super(zombie);
-    this.destination = null;
-  }
-
   enter(zombie) {
     super.enter(zombie);
 

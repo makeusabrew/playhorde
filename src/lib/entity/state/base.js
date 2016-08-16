@@ -1,9 +1,6 @@
 export default class EntityState {
-  constructor(entity) {
+  constructor() {
     this.time = null;
-    if (entity) {
-      this.enter(entity);
-    }
   }
 
   enter(entity) {
