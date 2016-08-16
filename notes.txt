@@ -40,3 +40,23 @@ s.on("change", state => {
 });
 
 Then again that's not much different to just making Zombies an event emitter and doing z.on("state:change");
+
+Consolidate EntityManager and EntityRenderer calls? Why can't the manager just always add the entity to the
+render list?
+
+Level design...
+
+Player starts in the middle, or whatever, of the map.
+Level is divided roughly into zones; the centre is zone 1, surrounded by a second,
+third, fourth etc. The further out the zone, the quicker zombies spawn in it.
+
+Let's assume for a minute that zombies only spawn in the outer zone. They start off idle.
+It's probably fair for a zombie to have some sort of homing instinct, i.e. they all know
+that they want to head roughly to the centre of the map - this coordinate doesn't have
+to be exact. They have little confidence in this destination (we might factor that in).
+
+Zombies then start ambling towards their overall destination. Based on an intelligence
+and communication value, they might pick up destinations or other info from other zombies they
+encounter en route.
+
+Visibility is surely just a factor of distance and relative angle - let's sort that.

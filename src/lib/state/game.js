@@ -12,17 +12,19 @@ import EntityManager from "../manager/entity";
 // of entities without cluttering up the entity classes with any rendering logic
 import RenderManager from "../manager/renderer";
 
+import {random} from "../util";
+
 class MainState extends Phaser.State {
   create() {
     // set up the player
     this.player = new Player();
-    this.player.x = 250;
-    this.player.y = 50;
+    this.player.x = 3200 / 2;
+    this.player.y = 3200 / 2;
     this.player.health = 100;
 
     // and and equip a knife
     this.player.addWeapon(new Knife(), true);
-    this.player.addWeapon(new Handgun(), true);
+    //this.player.addWeapon(new Handgun(), true);
 
     EntityManager.add(this.player);
 
@@ -50,12 +52,29 @@ class MainState extends Phaser.State {
 
     RenderManager.add(this.player, this);
 
-    // temporarily set up some random zombies
-    for (let i = 0; i < 10; i++) {
+
+    this.time.events.loop(3000, () => {
+      if (random(0, 3) !== 0) {
+        return;
+      }
+
       const zombie = new Zombie();
 
-      zombie.x = 100 + (i*50);
-      zombie.y = 100 + (i*50);
+      const spawnZones = [
+        // top rectangle
+        [0, 3200, 0, 320],
+        // left rectangle
+        [0, 320, 0, 3200],
+        // bottom rectangle
+        [0, 3200, 3200-320, 3200],
+        // right rectangle
+        [3200-320, 3200, 0, 3200]
+      ];
+
+      const rectangle = spawnZones[random(0, 4)];
+
+      zombie.x = random(rectangle[0], rectangle[1]);
+      zombie.y = random(rectangle[2], rectangle[3]);
       zombie.a = Math.floor(Math.random() * 360);
       zombie.health = 100 + Math.floor(Math.random() * 101);
 
@@ -69,7 +88,9 @@ class MainState extends Phaser.State {
 
       EntityManager.add(zombie);
       RenderManager.add(zombie, this);
-    }
+
+      console.log("Spawned zombie at %d,%d", zombie.x, zombie.y);
+    });
   }
 
   update() {
