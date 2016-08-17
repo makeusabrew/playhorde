@@ -16,7 +16,7 @@ export default class Zombie extends Entity {
 
     this.target = null;
 
-    // @TODO make really small. Not used yet. Anything in this small range we'll
+    // Anything in this small range we'll
     // know about even if it's quiet as a mouse or we're not facing it
     this.awarenessRadius = random(50, 100);
 
@@ -59,8 +59,12 @@ export default class Zombie extends Entity {
     return this.arms.isBusy();
   }
 
-  isTargetNear() {
+  canDetectTarget() {
     const distance = Point.distance(this.getPoint(), this.target.getPoint());
+
+    if (distance <= this.awarenessRadius) {
+      return true;
+    }
 
     // these ifs are a bit ugly because they do trivial checks first (for speed)
     // and *then* do the more complex detection inside the trivial test blocks

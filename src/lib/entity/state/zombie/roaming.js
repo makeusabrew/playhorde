@@ -33,7 +33,7 @@ export default class RoamingState extends State {
   execute() {
     const zombie = this.entity;
 
-    if (zombie.isTargetNear()) {
+    if (zombie.canDetectTarget()) {
       return this.set(new TrackingState());
     }
 

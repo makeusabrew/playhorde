@@ -12,22 +12,26 @@ export default class Handgun extends Weapon {
     this.type = "projectile";
   }
 
-  fire({x, y, a}) {
+  fire(owner) {
 
     const now = Date.now();
 
     this.lastFired = now;
     this.readyAt = now + RELOAD_TIME;
 
+    const {x, y, a} = owner.getPosition();
+
     const radAngle = Phaser.Math.degToRad(a);
 
     const bullet = new Bullet();
 
+    bullet.owner = owner;
     bullet.x = x;
     bullet.y = y;
     bullet.a = a;
     bullet.vx = BULLET_VELOCITY * Math.cos(radAngle);
     bullet.vy = BULLET_VELOCITY * Math.sin(radAngle);
+    bullet.damage = 25;
 
     this.emit("fire");
 
