@@ -56,10 +56,6 @@ export default class Zombie extends Entity {
     super.tick();
   }
 
-  isAttacking() {
-    return this.arms.isBusy();
-  }
-
   canDetectTarget() {
     const distance = Point.distance(this.getPoint(), this.target.getPoint());
 
@@ -95,5 +91,9 @@ export default class Zombie extends Entity {
     }
 
     return false;
+  }
+
+  getWeapon() {
+    return this.arms;
   }
 }

@@ -42,10 +42,30 @@ export default {
       // @FIXME not working well at all
       playerKnife.addAnimation("attack", 0, 14, 20, 0, 0);
 
-      // @TODO: need some way of a) grouping sprites ourselves and b) setting which sprite of
-      // a group is the currently active layer
+      playerKnife.setCondition(entity => {
+        const w = entity.getWeapon();
+        return (w && w.constructor.name === "Knife");
+      });
 
       renderers.push(playerKnife);
+
+      const playerGun = new EntityRenderer(
+        entity,
+        loader.add.sprite(0, 0, "player:handgun", "idle_0.png"),
+        0.2
+      );
+
+      playerGun.addAnimation("idle", 0, 19, 20);
+      playerGun.addAnimation("walk", 0, 19, 20);
+      playerGun.addAnimation("attack", 0, 14, 20, 0, 0);
+      playerGun.addAnimation("shoot", 0, 2, 5, 0, 0);
+
+      playerGun.setCondition(entity => {
+        const w = entity.getWeapon();
+        return (w && w.constructor.name === "Handgun");
+      });
+
+      renderers.push(playerGun);
       break;
 
     case "Zombie":

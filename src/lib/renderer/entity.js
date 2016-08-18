@@ -14,15 +14,27 @@ export default class EntityRenderer {
     this.animated = false;
     this.animMeta = {};
     this.currentAnim = null;
+    this.condition = null;
+  }
+
+  setCondition(callback) {
+    this.condition = callback;
   }
 
   reconcile() {
     let offsetX = 0;
     let offsetY = 0;
 
+    if (this.condition) {
+      this.sprite.visible = !!this.condition.call(null, this.entity);
+    }
+
     if (this.animated) {
-      if (this.entity.isAttacking() && this.getAnimation("attack")) {
-        this.setAnimation("attack");
+
+      const weapon = this.entity.getWeapon();
+
+      if (weapon && this.getAnimation(weapon.getPhase())) {
+        this.setAnimation(weapon.getPhase());
       } else if (this.entity.hasVelocity()) {
         this.setAnimation("walk");
       } else {

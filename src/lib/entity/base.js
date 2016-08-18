@@ -62,4 +62,10 @@ export default class Entity extends EventEmitter {
   kill() {
     this.alive = false;
   }
+
+  // all entities should NOT have this method... need
+  // to start to split this stuff
+  getWeapon() {
+    return null;
+  }
 }

@@ -13,7 +13,11 @@ export default class Weapon {
   fire() {
   }
 
-  isInDamagePhase() {
-    return false;
+  getPhase() {
+    if (!this.isBusy()) {
+      return null;
+    }
+
+    return "attack";
   }
 }

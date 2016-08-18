@@ -4,13 +4,9 @@ import Player from "../entity/player";
 import Zombie from "../entity/zombie";
 
 import Knife from "../weapon/knife";
-import Handgun from "../weapon/handgun";
+//import Handgun from "../weapon/handgun";
 
 import EntityManager from "../manager/entity";
-
-// a global track of all entity renderers, which simply take care of the presentation
-// of entities without cluttering up the entity classes with any rendering logic
-import RenderManager from "../manager/renderer";
 
 import {random} from "../util";
 
@@ -26,7 +22,7 @@ class MainState extends Phaser.State {
 
     // and and equip a knife
     this.player.addWeapon(new Knife(), true);
-    this.player.addWeapon(new Handgun(), true);
+    //this.player.addWeapon(new Handgun(), true);
 
     // phaser map stuff
     this.map = this.add.tilemap("level1");

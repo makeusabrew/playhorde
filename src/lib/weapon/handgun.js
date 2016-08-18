@@ -35,4 +35,12 @@ export default class Handgun extends Weapon {
 
     return bullet;
   }
+
+  getPhase() {
+    if (!this.isBusy()) {
+      return null;
+    }
+
+    return "shoot";
+  }
 }
