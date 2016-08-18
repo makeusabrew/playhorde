@@ -31,7 +31,7 @@ export default class Handgun extends Weapon {
     bullet.a = a;
     bullet.vx = BULLET_VELOCITY * Math.cos(radAngle);
     bullet.vy = BULLET_VELOCITY * Math.sin(radAngle);
-    bullet.damage = 25;
+    bullet.damage = 30;
 
     this.emit("fire");
 
