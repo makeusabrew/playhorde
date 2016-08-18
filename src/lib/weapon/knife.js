@@ -15,8 +15,6 @@ export default class Knife extends Weapon {
 
     this.lastFired = now;
     this.readyAt = now + RELOAD_TIME;
-
-    this.emit("fire");
   }
 
   isInDamagePhase(now) {

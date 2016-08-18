@@ -1,9 +1,5 @@
-import EventEmitter from "eventemitter3";
-
-export default class Weapon extends EventEmitter {
+export default class Weapon {
   constructor() {
-    super();
-
     this.lastFired = 0;
 
     // an absolute time value when this weapon will be ready again

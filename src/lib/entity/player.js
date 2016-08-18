@@ -26,6 +26,7 @@ export default class Player extends Entity {
       return;
     }
 
+    this.emit("fire");
     return weapon.fire(this);
   }
 
